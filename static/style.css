@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #111;
-    color: #eee;
+    background-color: #010508;
+    color: #001F52;
     padding: 40px;
 }
 
@@ -11,13 +11,13 @@ h1 {
 
 .Dashboard {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 200px));
     gap: 16px;
     margin-top: 35px;
 }
 
 .Widget {
-    background-color: #010508;
+    background-color: #011536;
     border-radius: 3px;
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
@@ -34,7 +34,7 @@ h1 {
 }
 
 .Widget-content a {
-    color:#1a4b99;
+    color:#7a90b3;
     text-decoration: none;
 }
 
@@ -47,4 +47,8 @@ h1 {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.Widget-header-h3 {
+    color:#eee;
 }

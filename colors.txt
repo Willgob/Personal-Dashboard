@@ -2,3 +2,5 @@ Color Pallete:
 
 Background: #010508
 Headers: #e4e9f2
+Widget backround: #011536
+Text Colour: #001F52
