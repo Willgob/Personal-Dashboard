@@ -12,25 +12,43 @@
         <div class="dashboard">
             {% for widget in widgets %}
                 <div class="widget">
-                    <div class="widget-header">
-                        {{widget.title}}
-                    </div>
-
+                    <div class="widget-header">{{ widget.title }}</div>
                     <div class="widget-content">
+
+
+
                         {% if widget.type == "links" %}
                             <ul>
-                                {% for item in widget.items %}
+                                {% for link in widget.links %}
                                     <li>
-                                        <a href="{{items.url}}" target="_blank">{{items.name}}</a>
+                                        <a href="{{ link.url }}" target="_blank">{{ link.name }}</a>
                                     </li>
                                 {% endfor %}
                             </ul>
                         {% endif %}
+
+
+
+                        {% if widget.type == "todos" %}
+                            <ul>
+                                {% for todo in widget.todos %}
+                                    <li>
+                                        {% if todo.done %}
+                                            <s>{{ todo.task }}</s>
+                                        {% else %}
+                                            {{ todo.task }}
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+
+
                     </div>
                 </div>
             {% endfor %}
         </div>
             
-
     </body>
     </html>
