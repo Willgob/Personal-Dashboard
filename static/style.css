@@ -9,46 +9,46 @@ h1 {
     color: #e4e9f2;
 }
 
-.Dashboard {
+.dashboard {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 200px));
     gap: 16px;
     margin-top: 35px;
 }
 
-.Widget {
+.widget {
     background-color: #011536;
     border-radius: 3px;
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-.Widget-header {
+.widget-header {
     font-weight: bold;
     margin-bottom: 10px;
     color: #c4d7f5;
 }
 
-.Widget-content li {
+.widget-content li {
     margin-bottom: 8px;
 }
 
-.Widget-content a {
+.widget-content a {
     color:#7a90b3;
     text-decoration: none;
 }
 
-.Widget-content a:hover {
+.widget-content a:hover {
     cursor: pointer;
     text-decoration: underline;
 }
 
-.Widget-content ul {
+.widget-content ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.Widget-header-h3 {
+.widget-header-h3 {
     color:#eee;
 }

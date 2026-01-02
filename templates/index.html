@@ -1,27 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
-    <title>Dashboard</title>
-</head>
-<body>
-    <h1>Me Dashbad</h1>
-    
-    <div class="Dashboard">
-        <div class="Widget">
-            <div class="Widget-header">
-                <h3 class="Widget-header-h3">Quick Links</h3>
-            </div>
-            <div class="Widget-content">
-                <ul>
-                    <li><a href="https://google.com.au" target="_blank">Google</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/style.css">
+        <title>Dashboard</title>
+    </head>
+    <body>
+        <h1>Me Dashbad</h1>
         
+        <div class="dashboard">
+            {% for widget in widgets %}
+                <div class="widget">
+                    <div class="widget-header">
+                        {{widget.title}}
+                    </div>
 
-</body>
-</html>
+                    <div class="widget-content">
+                        {% if widget.type == "links" %}
+                            <ul>
+                                {% for item in widget.items %}
+                                    <li>
+                                        <a href="{{item.url}}" target="_blank">{{item.name}}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+            
+
+    </body>
+    </html>
