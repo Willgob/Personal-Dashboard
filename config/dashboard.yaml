@@ -13,6 +13,6 @@ widgets:
       - task: Clean Cupboard
         done: false
       - task: Annoy Alice
-        done: true
+        done: false
       - task: Hackclub The game
         done: false

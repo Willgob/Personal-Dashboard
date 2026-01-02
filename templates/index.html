@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/static/style.css">
+        <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
         <title>Dashboard</title>
     </head>
     <body>
@@ -25,14 +26,14 @@
                                     </li>
                                 {% endfor %}
                             </ul>
-                        {% endif %}
+                        {% endif %} 
 
 
 
                         {% if widget.type == "todos" %}
-                            <ul>
+                            <ul class="todo-list">
                                 {% for todo in widget.todos %}
-                                    <li>
+                                    <li data-done="{{ 'true' if todo.done else 'false' }}">
                                         {% if todo.done %}
                                             <s>{{ todo.task }}</s>
                                         {% else %}
@@ -42,6 +43,8 @@
                                 {% endfor %}
                             </ul>
                         {% endif %}
+
+
 
 
 
