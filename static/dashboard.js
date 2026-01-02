@@ -51,7 +51,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function addTodo() {
+        document.querySelectorAll('.widget').forEach(widget => {
+            const todoList = widget.querySelector('.todo-list');
+            const input = widget.querySelector('.todo-input');
+            const button = widget.querySelector('.todo-input-button');
+
+            if(todoList && input && button) {
+                button.addEventListener('click', () => {
+                    const taskText = input.value.trim();
+                    if(taskText === '') return;
+
+                    const li = document.createElement('li');
+                    li.setAttribute('data-done', 'false');
+                    li.textContent = taskText;
+
+                    todoList.appendChild(li);
+                    input.value = '';
+
+
+                    attachToggle();
+                    SaveTodos();
+                });
+
+
+                input.addEventListener('keypress', (e) => {
+                    if(e.key === 'Enter') {
+                        button.click();
+                    }
+                });
+            }
+        });
+    }
+            
+                
+    function Reset() {
+        document.querySelectorAll('.widget').forEach(widget => {
+            const todoList = widget.querySelector('.todo-list');
+            const resetButton = widget.querySelector('.todo-reset-button');
+            const title = widget.querySelector('.widget-header')?.textContent.trim();
+
+            if(todoList && resetButton && title) {
+                resetButton.addEventListener('click', () => {
+                    if(!confirm('U done?')) return;
+                    todoList.innerHTML = '';
+                    const todos = JSON.parse(localStorage.getItem('todos') || '{}');
+                    delete todos[title];
+                    localStorage.setItem('todos', JSON.stringify(todos));
+                });
+            }
+        });
+    }
+
+
+
     loadTodos();
     attachToggle();
+    addTodo();
+    Reset();
 
 });
