@@ -9,36 +9,36 @@ h1 {
     color: #e4e9f2;
 }
 
-.dashboard {
+.Dashboard {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 16px;
     margin-top: 35px;
 }
 
-.widget {
+.Widget {
     background-color: #010508;
     border-radius: 3px;
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-.widget-header {
+.Widget-header {
     font-weight: bold;
     margin-bottom: 10px;
     color: #c4d7f5;
 }
 
-.widget-content li {
+.Widget-content li {
     margin-bottom: 8px;
 }
 
-.widget-content a {
+.Widget-content a {
     color:#1a4b99;
     text-decoration: none;
 }
 
-.widget-content a:hover {
+.Widget-content a:hover {
     cursor: pointer;
     text-decoration: underline;
 }
