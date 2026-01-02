@@ -1,1 +1,4 @@
 Color Pallete:
+
+Background: #010508
+Headers: #e4e9f2
