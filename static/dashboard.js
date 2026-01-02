@@ -1,15 +1,57 @@
-
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.todo-list li').forEach(item => {
-        item.addEventListener('click', () => {
-            let done = item.getAttribute('data-done') === 'true';
-            if (done){
-                item.innerHTML = item.textContent;
-                item.setAttribute('data-done', 'false');
-            } else {
-                item.innerHTML = `<s>${item.textContent}</s>`;
-                item.setAttribute('data-done', 'true');
+
+    function SaveTodos() {
+        const todos = {};
+        document.querySelectorAll('.widget').forEach(widget => {
+            const title = widget.querySelector('.widget-header').textContent.trim();
+            const todoList = widget.querySelectorAll('.todo-list li');
+            if(todoList.length > 0) {
+                todos[title] = [];
+                todoList.forEach(li => {
+                    const done = li.getAttribute('data-done') === 'true';
+                    const task = li.textContent.replace(/^\s*|\s*$/g, '');
+                    todos[title].push({task, done});
+                });
             }
         });
-    });
+        localStorage.setItem('todos', JSON.stringify(todos));
+        
+    }
+
+    function loadTodos() {
+        const todos = JSON.parse(localStorage.getItem('todos') || '{}');
+        document.querySelectorAll('.widget').forEach(widget => {
+            const title = widget.querySelector('.widget-header').textContent.trim();
+            const todoList = widget.querySelector('.todo-list');
+            if(todoList && todos[title]) {
+                todoList.innerHTML = '';
+                todos[title].forEach(task => {
+                    const li = document.createElement('li');
+                    li.setAttribute('data-done', task.done);
+                    li.innerHTML = task.done ? `<s>${task.task}</s>` : task.task;
+                    todoList.appendChild(li);
+                });
+            }
+        });
+    }
+
+    function attachToggle() {
+        document.querySelectorAll('.todo-list li').forEach(item => {
+            item.addEventListener('click', () => {
+                let done = item.getAttribute('data-done') === 'true';
+                if(done){
+                    item.innerHTML = item.textContent;
+                    item.setAttribute('data-done', 'false');
+                } else {
+                    item.innerHTML = `<s>${item.textContent}</s>`;
+                    item.setAttribute('data-done', 'true');
+                }
+                SaveTodos();
+            });
+        });
+    }
+
+    loadTodos();
+    attachToggle();
+
 });
