@@ -42,3 +42,9 @@ h1 {
     cursor: pointer;
     text-decoration: underline;
 }
+
+.Widget-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
