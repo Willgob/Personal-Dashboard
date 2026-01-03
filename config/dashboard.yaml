@@ -1,5 +1,6 @@
 widgets:
-  - type: links
+  - id: links-main
+    type: links
     title: Quick Links
     links:
       - name: Google
@@ -7,7 +8,8 @@ widgets:
       - name: GitHub
         url: https://github.com
 
-  - type: todos
+  - id: todos-main
+    type: todos
     title: To-Do List
     todos:
       - task: Clean Cupboard
@@ -16,3 +18,13 @@ widgets:
         done: false
       - task: Hackclub The game
         done: false
+
+  - id: weather-main
+    type: weather
+    title: Weather
+    location: Sydney, AU
+    units: metric
+    latitude: -33.8688
+    longitude: 151.2093
+
+  

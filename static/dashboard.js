@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function SaveTodos() {
         const todos = {};
         document.querySelectorAll('.widget').forEach(widget => {
-            const title = widget.querySelector('.widget-header').textContent.trim();
+            const id = widget.dataset.widgetId;
             const todoList = widget.querySelectorAll('.todo-list li');
             if(todoList.length > 0) {
-                todos[title] = [];
+                todos[id] = [];
                 todoList.forEach(li => {
                     const done = li.getAttribute('data-done') === 'true';
                     const task = li.textContent.replace(/^\s*|\s*$/g, '');
-                    todos[title].push({task, done});
+                    todos[id].push({task, done});
                 });
             }
         });
@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadTodos() {
         const todos = JSON.parse(localStorage.getItem('todos') || '{}');
         document.querySelectorAll('.widget').forEach(widget => {
-            const title = widget.querySelector('.widget-header').textContent.trim();
+            const id = widget.dataset.widgetId;
             const todoList = widget.querySelector('.todo-list');
-            if(todoList && todos[title]) {
+            if(todoList && todos[id]) {
                 todoList.innerHTML = '';
-                todos[title].forEach(task => {
+                todos[id].forEach(task => {
                     const li = document.createElement('li');
                     li.setAttribute('data-done', task.done);
                     li.innerHTML = task.done ? `<s>${task.task}</s>` : task.task;
@@ -89,18 +89,55 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.widget').forEach(widget => {
             const todoList = widget.querySelector('.todo-list');
             const resetButton = widget.querySelector('.todo-reset-button');
-            const title = widget.querySelector('.widget-header')?.textContent.trim();
+            const id = widget.dataset.widgetId;
 
-            if(todoList && resetButton && title) {
+            if(todoList && resetButton && id) {
                 resetButton.addEventListener('click', () => {
                     if(!confirm('U done?')) return;
                     todoList.innerHTML = '';
                     const todos = JSON.parse(localStorage.getItem('todos') || '{}');
-                    delete todos[title];
+                    delete todos[id];
                     localStorage.setItem('todos', JSON.stringify(todos));
                 });
             }
         });
+    }
+
+
+    async function Weather() {
+
+        const widgets = document.querySelectorAll('.weather-widget');
+
+        for (const widget of widgets) {
+            const location = widget.dataset.location;
+            const units = widget.dataset.units;
+            const id = widget.dataset.widgetId;
+            const latitude = widget.dataset.latitude;
+            const longitude = widget.dataset.longitude;
+            
+            widget.innerHTML = `hello `;
+            const metnourl = 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=' + latitude + '&lon=' + longitude;
+            console.log(metnourl);
+
+            const respond = await fetch(metnourl, {
+                headers: { 'User-Agent' : 'MyDashboard/1.3'}
+            });
+
+            const data = await respond.json();
+
+            console.log(data.properties.timeseries[0].data.instant.details);
+
+            const temperature = data.properties.timeseries[0].data.instant.details.air_temperature;
+
+            // widget.innerHTML = ` Temp - ${temperature} °C`;
+
+            console.log(widget.dataset);
+
+            // testing
+
+            
+        }
+
     }
 
 
@@ -109,5 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     attachToggle();
     addTodo();
     Reset();
+    Weather();
+
 
 });

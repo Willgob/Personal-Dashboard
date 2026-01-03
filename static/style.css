@@ -65,3 +65,12 @@ h1 {
 .widget-content s {
     color: #888;
 }
+
+.weather-widget {
+    min-height: 40px;
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 1.4;
+    border: 10px solid #0000ef; 
+    background-color: red;
+}
