@@ -177,17 +177,23 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
 
+            let tempShown;
+            if (temp_unit === 'celsius') {
+                tempShown = `Temp - ${temperature} °C`;
+            } else if (temp_unit === 'fahrenheit') {
+                tempShown = `Temp - ${temperature} °F`;
+            }
+
             widget.innerHTML = `
             <span class = "weather-location-span" > Location: ${location} </span>
             <hr class="weather-hr">
             <span class = "weathercode" > Weather Code - ${weatherCodes[weathercode]} </span>
             <br>
-            <span class = "temp" > Temp - ${temperature} °C </span>
+            <span class = "temp" > ${tempShown} </span>
             <br>
             <span class = "humidity" > Humidity - ${humidity}% </span>
             <br>
             <span class = "windspeed" > Windspeed - ${windspeed} km/h </span>
-
             `;
 
             console.log(widget.dataset);
