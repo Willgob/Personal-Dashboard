@@ -26,4 +26,11 @@ widgets:
     latitude: -33.8688
     longitude: 151.2093
 
+  - id: hackatime-main
+    type: hackatime
+    title: Hackatime
+    project-name: Personal-Dashboard
+
+
+
   

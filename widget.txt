@@ -16,3 +16,4 @@ sound controls so on
 calander
 reminders
 automations
+github stats
