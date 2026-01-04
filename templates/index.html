@@ -13,71 +13,95 @@
         
         <div class="dashboard">
             {% for widget in widgets %}
-                <div class="widget" data-widget-id= "{{ widget.id }}">
+            <!-- <div class="widget-header">{{ widget.title }}</div> -->
+
+
+            {% if widget.type == "links" %}
+                <div class = "widget links_widget" data-x="{{ widget.x }}" data-y="{{ widget.y }}" data-width="{{ widget.width }}" data-height="{{ widget.height }}" data-widget-id="{{ widget.id }}">
                     <div class="widget-header">{{ widget.title }}</div>
                     <div class="widget-content">
-
-
-
-                        {% if widget.type == "links" %}
-                            <ul>
-                                {% for link in widget.links %}
-                                    <li>
-                                        <a href="{{ link.url }}" target="_blank">{{ link.name }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %} 
-
-
-
-                        {% if widget.type == "todos" %}
-                            <ul class="todo-list">
-                                {% for todo in widget.todos %}
-                                    <li data-done="{{ 'true' if todo.done else 'false' }}">
-                                        {% if todo.done %}
-                                            <s>{{ todo.task }}</s>
-                                        {% else %}
-                                            {{ todo.task }}
-                                        {% endif %}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-
-
-                            <div class="todo-add">
-                                <input type="text" class="todo-input" placeholder=" Add new task...">
-                                
-                            </div>
-
-                            <div class="todo-controls">
-                                <button class = "todo-input-button" role="button" >Add</button>
-                                <button class="todo-reset-button" role="button" >Reset</button>
-                            </div>
-                            
-
-                        {% endif %}
-
-
-                        {% if widget.type == "weather" %}
-                            <div class="weather-widget" data-location="{{ widget.location }}" data-units="{{ widget.units }}" data-latitude="{{ widget.latitude }}" data-longitude="{{ widget.longitude }}" data-widget-id="{{ widget.id }}" data-tempunit="{{ widget.tempunit }}" data-windspeedunit="{{ widget.windspeedunit }}">
-                                <div class="weather-location">{{ widget.location }}</div>
-                                <div class="weather-temperature">Loading...</div>
-                                <div class="weather-description"></div>
-                                
-                            </div>
-                        {% endif %}
-
-                        {% if widget.type == "hackatime" %}
-                            <div class = "hackatime-widget">
-                                <div class = "hackatime-loading" > Loading... </div>
-                            </div>
-                        {% endif %}
-
-                        
-
+                        <ul>
+                        {% for link in widget.links %}
+                        <li>
+                        <a href="{{ link.url }}" target="_blank">{{ link.name }}</a>
+                        </li>
+                        {% endfor %}
+                        </ul>
                     </div>
                 </div>
+
+            {% endif %} 
+
+
+
+            {% if widget.type == "todos" %}
+                <div class="widget todo_widget" data-x="{{ widget.x }}" data-y="{{ widget.y }}" data-width="{{ widget.width }}" data-height="{{ widget.height }}" data-widget-id="{{ widget.id }}">
+                    <div class="widget-header">{{ widget.title }}</div>
+                    <div class="widget-content">
+                        <ul class="todo-list">
+                        {% for todo in widget.todos %}
+                            <li data-done="{{ 'true' if todo.done else 'false' }}">
+                                {% if todo.done %}
+                                    <s>{{ todo.task }}</s>
+                                {% else %}
+                                    {{ todo.task }}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                        </ul>
+
+                        <div class="todo-add">
+                            <input type="text" class="todo-input" placeholder=" Add new task...">
+                            
+                        </div>
+
+                        <div class="todo-controls">
+                            <button class = "todo-input-button" role="button" >Add</button>
+                            <button class="todo-reset-button" role="button" >Reset</button>
+                        </div>
+                    </div>
+
+                </div>
+            
+            {% endif %}
+
+
+            {% if widget.type == "weather" %}
+                <div class="widget weather_widget" 
+                data-location="{{ widget.location }}" 
+                data-units="{{ widget.units }}" 
+                data-latitude="{{ widget.latitude }}" 
+                data-longitude="{{ widget.longitude }}" 
+                data-widget-id="{{ widget.id }}" 
+                data-tempunit="{{ widget.tempunit }}" 
+                data-windspeedunit="{{ widget.windspeedunit }}"
+                data-x="{{ widget.x }}"
+                data-y="{{ widget.y }}"
+                data-width="{{ widget.width }}"
+                data-height="{{ widget.height }}">
+
+                    <div class="widget-header">{{ widget.title }}</div>
+                    <div class="widget-content">
+                        <div class="weather-location">{{ widget.location }}</div>
+                        <div class="weather-temperature">Loading...</div>
+                        <div class="weather-description"></div>
+                    </div>
+
+                </div>
+            {% endif %}
+            
+
+
+            {% if widget.type == "hackatime" %}
+                <div class = " widget hackatime-widget">
+                    <div class = "widget-header" > {{ widget.title }} </div>
+                    <div class = "widget-content">
+                        <div class = "hackatime-loading" > Loading... </div>
+                    </div>
+                </div>
+            {% endif %}
+
+                    
             {% endfor %}
         </div>
             

@@ -2,6 +2,10 @@ widgets:
   - id: links-main
     type: links
     title: Quick Links
+    x: 5
+    y: 1
+    width: 1
+    height: 2
     links:
       - name: Google
         url: https://google.com.au
@@ -11,6 +15,10 @@ widgets:
   - id: todos-main
     type: todos
     title: To-Do List
+    x: 3
+    y: 1
+    width: 2
+    height: 3
     todos:
       - task: Annoy Alice
         done: true
@@ -25,6 +33,10 @@ widgets:
     windspeedunit: kmh
     latitude: -33.8688
     longitude: 151.2093
+    x: 1
+    y: 1
+    width: 2
+    height: 2
 
   - id: hackatime-main
     type: hackatime

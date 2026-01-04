@@ -17,3 +17,6 @@ calander
 reminders
 automations
 github stats
+ping
+homeassistant
+spotify/audio

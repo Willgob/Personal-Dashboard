@@ -117,7 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function Weather() {
 
-        const widgets = document.querySelectorAll('.weather-widget');
+        const widget = document.querySelectorAll('.weather_widget');
+        const widgets = document.querySelectorAll('.weather_widget');
 
         for (const widget of widgets) {
             const location = widget.dataset.location;
@@ -130,9 +131,12 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(temp_unit);
             // widget.innerHTML = `hello `;
 
+            
+
+
             let url_weather = '';
 
-            if (temp_unit === 'celcius') {
+            if (temp_unit === 'celsius') {
                  url_weather = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&hourly=temperature_2m,relativehumidity_2m,windspeed_10m,weathercode&wind_speed_unit=' + windspeed_unit;
             } else {
                  url_weather = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&hourly=temperature_2m,relativehumidity_2m,windspeed_10m,weathercode&temperature_unit=' + temp_unit + '&wind_speed_unit=' + windspeed_unit;
@@ -184,7 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 tempShown = `Temp - ${temperature} °F`;
             }
 
-            widget.innerHTML = `
+
+            const content = widget.querySelector('.widget-content');
+
+            content.innerHTML = `
             <span class = "weather-location-span" > Location: ${location} </span>
             <hr class="weather-hr">
             <span class = "weathercode" > Weather Code - ${weatherCodes[weathercode]} </span>
@@ -205,6 +212,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    function GridSetup() {
+        const dashboard = document.getElementById('dashboard');
+        const columns = 12;
+
+        document.querySelectorAll('.widget').forEach(widget => {
+            const x = parseInt(widget.dataset.x);
+            const y = parseInt(widget.dataset.y);
+            const width = parseInt(widget.dataset.width);
+            const height = parseInt(widget.dataset.height);
+
+            const okx = Math.max(1, Math.min(x, columns));
+            const okwidth = Math.min(width, columns - okx + 1);
+
+            widget.style.gridColumn = `${okx} / span ${okwidth}`;
+            widget.style.gridRow = `${y} / span ${height}`; 
+
+        });
+
+
+    }
 
 
     loadTodos();
@@ -212,6 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
     addTodo();
     Reset();
     Weather();
+    GridSetup();
 
 
 });
