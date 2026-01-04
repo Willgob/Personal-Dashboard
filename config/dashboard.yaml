@@ -21,7 +21,8 @@ widgets:
     type: weather
     title: Weather
     location: Sydney, AU
-    units: metric
+    tempunit: celsius
+    windspeedunit: kmh
     latitude: -33.8688
     longitude: 151.2093
 

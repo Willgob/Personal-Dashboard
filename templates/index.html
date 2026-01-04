@@ -60,7 +60,10 @@
 
 
                         {% if widget.type == "weather" %}
-                            <div class="weather-widget" data-location="{{ widget.location }}" data-units="{{ widget.units }}" data-latitude="{{ widget.latitude }}" data-longitude="{{ widget.longitude }}" data-widget-id="{{ widget.id }}">
+                            <div class="weather-widget" data-location="{{ widget.location }}" data-units="{{ widget.units }}" data-latitude="{{ widget.latitude }}" data-longitude="{{ widget.longitude }}" data-widget-id="{{ widget.id }}" data-tempunit="{{ widget.tempunit }}" data-windspeedunit="{{ widget.windspeedunit }}">
+                                <div class="weather-location">{{ widget.location }}</div>
+                                <div class="weather-temperature">Loading...</div>
+                                <div class="weather-description"></div>
                                 
                             </div>
                         {% endif %}

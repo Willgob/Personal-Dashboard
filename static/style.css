@@ -76,7 +76,7 @@ h1 {
 } */
 
 .weather-widget .weather-location-span {
-    font-style: italic;
+    font-style: oblique 5deg;
     font-size: 1.3rem;
     color: cadetblue;
 }

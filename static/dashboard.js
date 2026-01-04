@@ -125,25 +125,69 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = widget.dataset.widgetId;
             const latitude = widget.dataset.latitude;
             const longitude = widget.dataset.longitude;
-            
+            const temp_unit = widget.dataset.tempunit;
+            const windspeed_unit = widget.dataset.windspeedunit;
+            console.log(temp_unit);
             // widget.innerHTML = `hello `;
 
-            const metourl = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&hourly=temperature_2m';
-            console.log(metourl);
+            let url_weather = '';
 
-            const respond = await fetch(metourl);
-            const data = await respond.json();
-
-            console.log(data);
-
-            const temperature = data.hourly.temperature_2m[0];
-
+            if (temp_unit === 'celcius') {
+                 url_weather = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&hourly=temperature_2m,relativehumidity_2m,windspeed_10m,weathercode&wind_speed_unit=' + windspeed_unit;
+            } else {
+                 url_weather = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&hourly=temperature_2m,relativehumidity_2m,windspeed_10m,weathercode&temperature_unit=' + temp_unit + '&wind_speed_unit=' + windspeed_unit;
+            }
             
+            console.log(url_weather);
+
+            const respond = await fetch(url_weather);
+            const data_weather = await respond.json();
+
+
+
+            console.log(data_weather);
+
+            const temperature = data_weather.hourly.temperature_2m[0];
+            const humidity = data_weather.hourly.relativehumidity_2m[0];
+            const windspeed = data_weather.hourly.windspeed_10m[0];
+            const weathercode = data_weather.hourly.weathercode[0];
+            const weatherCodes = {
+                0: "Clear Sky",
+                1: "Mainly Clear",
+                2: "Partly Cloudy",
+                3: "Overcast",
+                45: "Fog",
+                48: "Depositing Rime Fog",
+                51: "Light Drizzle",
+                53: "Moderate Drizzle",
+                55: "Dense Drizzle",
+                61: "Slight Rain",
+                63: "Moderate Rain",
+                65: "Heavy Rain", 
+                71: "Slight Snow",
+                73: "Moderate Snow",
+                75: "Heavy Snow",
+                80: "Slight Rain Showers",
+                81: "Moderate Rain Showers",
+                82: "Violent Rain Showers",
+                95: "Thunderstorm",
+                96: "Thunderstorm with Hail",
+                99: "Heavy Hail Thunderstorm"
+
+            };
+
 
             widget.innerHTML = `
             <span class = "weather-location-span" > Location: ${location} </span>
+            <hr class="weather-hr">
+            <span class = "weathercode" > Weather Code - ${weatherCodes[weathercode]} </span>
             <br>
-            <soan class = "temp" > Temp - ${temperature} °C </span>
+            <span class = "temp" > Temp - ${temperature} °C </span>
+            <br>
+            <span class = "humidity" > Humidity - ${humidity}% </span>
+            <br>
+            <span class = "windspeed" > Windspeed - ${windspeed} km/h </span>
+
             `;
 
             console.log(widget.dataset);

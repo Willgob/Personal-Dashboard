@@ -1,0 +1,18 @@
+Hackatime
+timer
+clock
+weather
+ssh maybe in to homeassistant
+amber
+foxess
+computer stats
+shortcuts
+app opening
+visually looks good
+send emails?
+images
+bar at top
+sound controls so on 
+calander
+reminders
+automations
