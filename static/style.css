@@ -78,7 +78,7 @@ h1 {
     background-color: red;
 } */
 
-.weather-widget .weather-location-span {
+.weather_widget .weather-location-span {
     font-style: oblique 5deg;
     font-size: 1.3rem;
     color: cadetblue;
