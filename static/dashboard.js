@@ -94,6 +94,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if(todoList && resetButton && id) {
                 resetButton.addEventListener('click', () => {
                     if(!confirm('U done?')) return;
+                    if(!confirm('are u totallly sure u have done every single thing u have to do?')) return;
+                    if(!confirm('last change to tell the truth cause i know u havent finished everything')) return;
+                    if(!confirm('ok last last chance r u sure?')) return;
+                    if(!confirm('for real this time?')) return;
+                    if(!confirm('u sure u sure?')) return;
+                    if(!confirm('absolutely sure?')) return;
+                    if(!confirm('no take backs')) return;
+                    if(!confirm('press ok to reset your todo list')) return;
+                    if(!confirm('this is the final confirmation')) return;
+                    if(!confirm('rly rly sure?')) return;
+                    if(!confirm('ok fine :(')) return;
                     todoList.innerHTML = '';
                     const todos = JSON.parse(localStorage.getItem('todos') || '{}');
                     delete todos[id];
@@ -115,21 +126,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const latitude = widget.dataset.latitude;
             const longitude = widget.dataset.longitude;
             
-            widget.innerHTML = `hello `;
-            const metnourl = 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=' + latitude + '&lon=' + longitude;
-            console.log(metnourl);
+            // widget.innerHTML = `hello `;
 
-            const respond = await fetch(metnourl, {
-                headers: { 'User-Agent' : 'MyDashboard/1.3'}
-            });
+            const metourl = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&hourly=temperature_2m';
+            console.log(metourl);
 
+            const respond = await fetch(metourl);
             const data = await respond.json();
 
-            console.log(data.properties.timeseries[0].data.instant.details);
+            console.log(data);
 
-            const temperature = data.properties.timeseries[0].data.instant.details.air_temperature;
+            const temperature = data.hourly.temperature_2m[0];
 
-            // widget.innerHTML = ` Temp - ${temperature} °C`;
+            
+
+            widget.innerHTML = `
+            <span class = "weather-location-span" > Location: ${location} </span>
+            <br>
+            <soan class = "temp" > Temp - ${temperature} °C </span>
+            `;
 
             console.log(widget.dataset);
 

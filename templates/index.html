@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/static/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
         <title>Dashboard</title>
     </head>
     <body>
@@ -42,14 +44,17 @@
                                 {% endfor %}
                             </ul>
 
+
                             <div class="todo-add">
-                                <input type="text" class="todo-input" placeholder="Add new task...">
-                                <button class = "todo-input-button">Add</button>
+                                <input type="text" class="todo-input" placeholder=" Add new task...">
+                                
                             </div>
 
                             <div class="todo-controls">
-                                <button class="todo-reset-button">Reset</button>
+                                <button class = "todo-input-button" role="button" >Add</button>
+                                <button class="todo-reset-button" role="button" >Reset</button>
                             </div>
+                            
 
                         {% endif %}
 

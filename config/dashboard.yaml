@@ -12,10 +12,8 @@ widgets:
     type: todos
     title: To-Do List
     todos:
-      - task: Clean Cupboard
-        done: false
       - task: Annoy Alice
-        done: false
+        done: true
       - task: Hackclub The game
         done: false
 
