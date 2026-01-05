@@ -1,6 +1,6 @@
 Hackatime plugging for now
 timer
-clock
+clock   
 weather
 ssh maybe in to homeassistant
 amber
