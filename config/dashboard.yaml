@@ -39,9 +39,13 @@ widgets:
     height: 2
 
   - id: hackatime-main
+    x: 5
+    y: 3
+    width: 2
+    height: 2
     type: hackatime
     title: Hackatime
-    project-name: Personal-Dashboard
+    project: Personal-Dashboard
 
 
 

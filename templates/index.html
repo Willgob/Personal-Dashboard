@@ -93,7 +93,13 @@
 
 
             {% if widget.type == "hackatime" %}
-                <div class = " widget hackatime-widget">
+                <div class = " widget hackatime-widget" 
+                data-x="{{ widget.x }}" 
+                data-y="{{ widget.y }}" 
+                data-width="{{ widget.width }}" 
+                data-height="{{ widget.height }}" 
+                data-widget-id="{{ widget.id }}"
+                data-project = "{{ widget.project}}">
                     <div class = "widget-header" > {{ widget.title }} </div>
                     <div class = "widget-content">
                         <div class = "hackatime-loading" > Loading... </div>

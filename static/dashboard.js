@@ -233,6 +233,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    async function Hackatime() {
+        const API = "f613f08e-3ce3-4784-b873-9ec843cbbf05"; // hide thisss
+
+        document.querySelectorAll('.hackatime-widget').forEach(async (widget) => {
+            const project = widget.dataset.project;
+            const content = widget.querySelector('.widget-content');
+
+            const date = new Date();
+            const end_date = date.toISOString().split('T')[0];
+            const start_date = "2025-01-01";
+            const url = `https://hackatime.com/api/v1/users/current/stats`;
+
+            const response = await fetch(url, {
+                headers: {"Authorization": `Bearer ${API}`}
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            
+        });
+    }
+
 
     loadTodos();
     attachToggle();
@@ -240,6 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Reset();
     Weather();
     GridSetup();
+    Hackatime();
 
 
 });
