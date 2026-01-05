@@ -252,8 +252,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             console.log(data);
 
-            
+
         });
+    }
+
+    function clock() {
+        const time_html = document.getElementById("time-clock");
+        const date_html = document.getElementById("date-clock");
+
+        function update() {
+            const time_now = new Date();
+
+            const hours = String(time_now.getHours())
+            const minutes = String(time_now.getMinutes())
+            const seconds = String(time_now.getSeconds())
+
+            time_html.textContent = hours + `:` + minutes + `:` + seconds
+
+            const structure = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+            date_html.textContent = time_now.toLocaleDateString(undefined, structure);
+        }
+        update();
+        setInterval(update, 1000);
+
     }
 
 
@@ -264,6 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Weather();
     GridSetup();
     Hackatime();
+    clock();
 
 
 });

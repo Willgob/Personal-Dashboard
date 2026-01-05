@@ -93,7 +93,7 @@
 
 
             {% if widget.type == "hackatime" %}
-                <div class = " widget hackatime-widget" 
+                <div class = "widget hackatime-widget" 
                 data-x="{{ widget.x }}" 
                 data-y="{{ widget.y }}" 
                 data-width="{{ widget.width }}" 
@@ -103,6 +103,24 @@
                     <div class = "widget-header" > {{ widget.title }} </div>
                     <div class = "widget-content">
                         <div class = "hackatime-loading" > Loading... </div>
+                    </div>
+                </div>
+            {% endif %}
+
+
+            {% if widget.type == "clock" %}
+                <div class = "widget clock-widget"
+                data-x="{{ widget.x }}"
+                data-x="{{ widget.x }}" 
+                data-y="{{ widget.y }}" 
+                data-width="{{ widget.width }}" 
+                data-height="{{ widget.height }}"
+                data-widget-id=" {{ widget.id }}">
+
+                    <div class = "widget-header"> {{ widget.title }}</div>
+                    <div class = "widget-content">
+                        <div class="time" id="time-clock">--:--:--</div>
+                        <div class="date" id="date-clock">--/--/----</div>
                     </div>
                 </div>
             {% endif %}

@@ -47,6 +47,15 @@ widgets:
     title: Hackatime
     project: Personal-Dashboard
 
+  - id: clock-main
+    x: 1
+    y: 3
+    width: 2
+    height: 1
+    type: clock
+    title: Clock
+
+
 
 
   
