@@ -18,7 +18,7 @@ widgets:
     type: todos
     title: To-Do List
     x: 3
-    y: 1
+    y: 3
     width: 2
     height: 3
     todos:
@@ -56,6 +56,14 @@ widgets:
     height: 1
     type: clock
     title: Clock
+
+  - id: timer-main
+    x: 3
+    y: 1
+    width: 2
+    height: 2
+    type: timer
+    title: Timer
 
 
 

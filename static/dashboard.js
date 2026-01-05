@@ -277,6 +277,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    function timer(){ 
+        // return;
+        const shown_html = document.getElementById("timer-display");
+        const hours_input= document.getElementById("hours-timer");
+        const minutes_input = document.getElementById("minutes-time");
+        const seconds_input = document.getElementById("seconds-timer");
+        const start_button = document.getElementById("start-timer");
+        const pause_button = document.getElementById("pause-timer");
+        const reset_button = document.getElementById("timer-reset");
+
+        let total_seconds = 0;
+        let interval = null;
+
+        function updateDisplay() {
+            const hours = String(Math.floor(total_seconds / 3600));
+            const minutes = String(Math.floor(total_seconds % 3600) / 60)
+            const seconds = String(total_seconds % 60)
+            display_timer.textContent = 
+        }
+    }
+
 
     loadTodos();
     attachToggle();

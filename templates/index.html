@@ -111,7 +111,6 @@
             {% if widget.type == "clock" %}
                 <div class = "widget clock-widget"
                 data-x="{{ widget.x }}"
-                data-x="{{ widget.x }}" 
                 data-y="{{ widget.y }}" 
                 data-width="{{ widget.width }}" 
                 data-height="{{ widget.height }}"
@@ -122,6 +121,33 @@
                         <div class="date" id="date-clock">--/--/----</div>  
                         <div class="time" id="time-clock">--:--:--</div>
                     </div>
+                </div>
+            {% endif %}
+
+
+            {% if widget.type == "timer" %}
+                <div class = "widget timer-widget"
+                data-x="{{ widget.x }}"
+                data-y="{{ widget.y }}"
+                data-width="{{ widget.width }}"
+                data-height="{{ widget.height }}"
+                data-widget-id="{{ widget.id }}">
+            
+                    <div class="widget-header"> {{ widget.title }}</div>
+                    <div class="widget-content">
+                        <div class="display_timer" id="display_timer"> 00.00.00</div>
+                        <hr>
+                        <div class="controls-timer">
+                        <input type="number" id="hours-timer" placeholder="Hour" min="0">
+                        <input type="number" id="minutes-timer" placeholder="Min" min="0" max="59">
+                        <input type="number" id="seconds-timer" placeholder="Sec" min="0" max="59">
+                        <br>
+                        <button id="start-timer">Start</button>
+                        <button id="pause-timer">Pause</button>
+                        <button id="reset-timer">Reset</button>
+                        </div>
+
+                    </div> 
                 </div>
             {% endif %}
 
