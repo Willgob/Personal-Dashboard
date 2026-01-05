@@ -11,6 +11,8 @@ widgets:
         url: https://google.com.au
       - name: GitHub
         url: https://github.com
+      - name: Youtube
+        url: https://youtube.com.au
 
   - id: todos-main
     type: todos
