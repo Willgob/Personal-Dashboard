@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const hours = String(Math.floor(total_seconds / 3600));
             const minutes = String(Math.floor(total_seconds % 3600) / 60)
             const seconds = String(total_seconds % 60)
-            display_timer.textContent = 
+            display_timer.textContent = 67;
         }
     }
 

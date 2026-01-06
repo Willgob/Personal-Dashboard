@@ -22,7 +22,7 @@ widgets:
     width: 2
     height: 3
     todos:
-      - task: Annoy Alice
+      - task: Annoy my sister
         done: true
       - task: Hackclub The game
         done: false
