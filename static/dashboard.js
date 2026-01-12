@@ -263,11 +263,11 @@ document.addEventListener('DOMContentLoaded', () => {
         function update() {
             const time_now = new Date();
 
-            const hours = String(time_now.getHours())
-            const minutes = String(time_now.getMinutes())
-            const seconds = String(time_now.getSeconds())
+            const hours = String(time_now.getHours()) || 0;
+            const minutes = String(time_now.getMinutes()) || 0;
+            const seconds = String(time_now.getSeconds()) || 0;
 
-            time_html.textContent = hours + `:` + minutes + `:` + seconds
+            time_html.textContent = hours + `:  ` + minutes + `:` + seconds
 
             const structure = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
             date_html.textContent = time_now.toLocaleDateString(undefined, structure);
@@ -278,25 +278,68 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function timer(){ 
+        document.querySelectorAll(".timer-widget").forEach(widget => {
         // return;
-        const shown_html = document.getElementById("timer-display");
-        const hours_input= document.getElementById("hours-timer");
-        const minutes_input = document.getElementById("minutes-time");
-        const seconds_input = document.getElementById("seconds-timer");
-        const start_button = document.getElementById("start-timer");
-        const pause_button = document.getElementById("pause-timer");
-        const reset_button = document.getElementById("timer-reset");
+            const display_timer = widget.querySelector(".display_timer");
+            const hours_input= widget.querySelector(".hours-timer");
+            const minutes_input = widget.querySelector(".minutes-timer");
+            const seconds_input = widget.querySelector(".seconds-timer");
+            const start_button = widget.querySelector(".start-timer");
+            const pause_button = widget.querySelector(".pause-timer");
+            const reset_button = widget.querySelector(".reset-timer");
 
-        let total_seconds = 0;
-        let interval = null;
+            let total_seconds = 0;
+            let interval = null;
 
-        function updateDisplay() {
-            const hours = String(Math.floor(total_seconds / 3600));
-            const minutes = String(Math.floor(total_seconds % 3600) / 60)
-            const seconds = String(total_seconds % 60)
-            display_timer.textContent = 67;
+            function updateDisplay() {
+                const hours = String(Math.floor(total_seconds / 3600)).padStart(2, "0");
+                const minutes = String(Math.floor((total_seconds % 3600) / 60)).padStart(2, "0");
+                const seconds = String(total_seconds % 60).padStart(2, "0");
+                display_timer.textContent = hours + `:` + minutes + `:` + seconds;
+            }
+
+            start_button.addEventListener("click", () => {
+
+                if(!interval) {
+                    const hours = parseInt(hours_input.value) || 0;
+                    const minutes = parseInt(minutes_input.value) || 0;
+                    const seconds = parseInt(seconds_input.value) || 0;
+                    total_seconds = hours * 3600 + minutes * 60 + seconds;
+
+
+                    interval = setInterval(() => {
+                        if (total_seconds <= 0) {
+                            clearInterval(interval);
+                            interval = null;
+                            alert("alert");
+                            return;
+                        }
+                        total_seconds --;
+                        updateDisplay();
+                    }, 1000);
+                }
+            });
+
+            pause_button.addEventListener("click",  ()=> {
+                if(interval) {
+                    clearInterval(interval);
+                    interval = null;
+                }
+            });
+
+            reset_button.addEventListener("click", () =>{
+                clearInterval(interval);
+                interval = null;
+                total_seconds = 0;
+                updateDisplay();
+                hours_input.value = "";
+                minutes_input.value = "";
+                seconds_input.value = "";
+            });
+
+            updateDisplay();
+        });
         }
-    }
 
 
     loadTodos();
@@ -305,8 +348,9 @@ document.addEventListener('DOMContentLoaded', () => {
     Reset();
     Weather();
     GridSetup();
-    Hackatime();
+    // Hackatime();
     clock();
+    timer();
 
 
 });
