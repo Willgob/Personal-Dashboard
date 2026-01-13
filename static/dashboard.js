@@ -278,8 +278,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function timer(){ 
+        
         document.querySelectorAll(".timer-widget").forEach(widget => {
-        // return;
+
+            let alarmsound = new Audio("/static/audio.mp3");
+            alarmsound.preload = "auto";
+            let unlocksound = false;
+
+            // alarmsound.play().catch(console.error);
+
+            // return;
             const display_timer = widget.querySelector(".display_timer");
             const hours_input= widget.querySelector(".hours-timer");
             const minutes_input = widget.querySelector(".minutes-timer");
@@ -306,18 +314,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     const seconds = parseInt(seconds_input.value) || 0;
                     total_seconds = hours * 3600 + minutes * 60 + seconds;
 
+                    if(!unlocksound) {
+                        alarmsound.play().then(()=> {
+                            alarmsound.pause();
+                            alarmsound.currentTime = 0;
+                            unlocksound = true;
+                        }).catch(() => {});
+                    }
+                            
 
                     interval = setInterval(() => {
                         if (total_seconds <= 0) {
                             clearInterval(interval);
                             interval = null;
-                            alert("alert");
+                            alarmsound.play();
+                            alert("Time is up :D");
                             return;
                         }
                         total_seconds --;
                         updateDisplay();
                     }, 1000);
                 }
+
             });
 
             pause_button.addEventListener("click",  ()=> {
