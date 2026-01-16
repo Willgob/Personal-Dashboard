@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const hours = parseInt(hours_input.value) || 0;
                     const minutes = parseInt(minutes_input.value) || 0;
                     const seconds = parseInt(seconds_input.value) || 0;
-                    total_seconds = hours * 3600 + minutes * 60 + seconds;
+                    total_seconds = hours * 3600 + minutes * 60 + seconds + 1;
 
                     if(!unlocksound) {
                         alarmsound.play().then(()=> {
