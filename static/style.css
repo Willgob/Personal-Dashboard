@@ -126,7 +126,8 @@ h1 {
     border-radius: 100px;
     padding: 5px 5px;
     border: none;
-    width: 50px;
+    width: 65px;
+    margin-bottom: 10px;
 }
 
 .display-timer {
@@ -135,4 +136,10 @@ h1 {
 }
 
 
-
+.controls-timer button{
+    color: #bebedc;
+    background-color: #6d6d9a;
+    border-radius: 5px;
+    border: none;
+    padding: 3px 6px;
+}
