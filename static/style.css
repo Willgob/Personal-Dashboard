@@ -127,7 +127,7 @@ h1 {
     padding: 5px 5px;
     border: none;
     width: 65px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .display-timer {
@@ -142,4 +142,15 @@ h1 {
     border-radius: 5px;
     border: none;
     padding: 3px 6px;
+}
+
+.controls-timer button:hover{
+    background-color: #5e708f;
+    transform: translateY(-2px);
+    transform: scale(1.05);
+}
+
+
+input[type="number"] {
+    -moz-appearance: textfield;
 }
