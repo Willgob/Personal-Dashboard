@@ -112,7 +112,7 @@ h1 {
     display: flex;
     margin-left: -5px;
 }
-.todo-add input {
+.todo-input {
     color: #fff;
     background-color: #474764;
     border-radius: 100px;
@@ -120,16 +120,19 @@ h1 {
     border: none;
 }
 
-#hours-timer, #minutes-timer, #seconds-timer {
-    width: 55px;
-    background-color: #2A2A3F;
-    border-color: whitesmoke;
-    border-radius: 3px;
-    border-width: 1px;
-    color: #d3e5ff;
+.hours-timer, .minutes-timer, .seconds-timer {
+    color: #fff;
+    background-color: #474764;
+    border-radius: 100px;
+    padding: 5px 5px;
+    border: none;
+    width: 50px;
 }
 
 .display-timer {
     font-size: 2.5rem;
     font-weight: bold;
 }
+
+
+
