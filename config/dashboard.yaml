@@ -77,7 +77,7 @@ widgets:
     x: 1
     y: 4
     width: 2
-    height: 2
+    height: 2 
     type: pc_stats_advanced
     title: Device Statistics
     display: 
