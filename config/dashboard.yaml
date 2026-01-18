@@ -66,12 +66,24 @@ widgets:
     title: Timer
 
   - id: pc_stats-main
+    x: 6
+    y: 1
+    width: 2
+    height: 2
+    type: pc_stats
+    title: Stats
+
+  - id: pc_stats-advanced
     x: 1
     y: 4
     width: 2
-    height: 3
-    type: pc_stats
-    title: Stats
+    height: 2
+    type: pc_stats_advanced
+    title: Device Statistics
+    display: 
+      - cpu-usage
+      - disk-usage
+      - ram-usage
 
 
 

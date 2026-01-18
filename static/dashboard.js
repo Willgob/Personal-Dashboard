@@ -387,6 +387,45 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        function pc_stats_advanced() {
+            document.querySelectorAll(".pc_stats_advanced-widget").forEach(widget =>{
+
+                const widget_content = widget.querySelector(".widget-content");
+                const display_list = widget.dataset.display ? widget.dataset.display.split(',') : ['cpu-usage', 'disk-usage', 'ram-usage'];
+
+                function update_stats() {
+                    fetch("/pcstats")
+                    .then(res => res.json())
+                    .then(data =>{
+                        let html_info = '';
+
+                        const cpu_percent = data.cpu_percent;
+                        const disk_usage = data.disk_percent;
+                        const ram_percent = data.ram_percent;
+
+                        if(display_list.includes('cpu-usage')) {
+                            html_info += `<span class="stats_text">CPU Usage</span> - ${cpu_percent}%<br>`
+                        }
+
+                        if(display_list.includes('disk-usage')) {
+                            html_info += `<span class="stats_text">Disk Usage</span> - ${disk_usage}%<br>`
+                        }
+                        
+                        if(display_list.includes('ram-usage')) {
+                            html_info += `<span class="stats_text">RAM Usage</span> - ${ram_percent}%`
+                        }
+
+
+                        widget_content.innerHTML = html_info;
+
+                    });
+                }
+
+                update_stats();
+                setInterval(update_stats, 1000);
+            });
+        }
+
 
     loadTodos();
     attachToggle();
@@ -398,6 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clock();
     timer();
     pc_stats();
+    pc_stats_advanced();
 
 
 });

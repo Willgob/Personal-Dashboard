@@ -29,7 +29,7 @@ def pcstats():
              "ram_percent" : ram.percent,
              "disk_installed" : disk.total,
              "disk_usage" : disk.used,
-            "disk_percent" : disk.percent
+             "disk_percent" : disk.percent
 
         }
 

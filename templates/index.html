@@ -167,6 +167,24 @@
                 </div>
             {% endif %}
 
+            {% if widget.type == "pc_stats_advanced" %}
+                <div class="widget pc_stats_advanced-widget"
+                data-x="{{ widget.x }}"
+                data-y="{{ widget.y }}"
+                data-width="{{ widget.width }}"
+                data-height="{{ widget.height }}"
+                data-widget-id="{{ widget.id }}"
+                data-display="{{widget.display | join(',') }}">
+                
+                <div class="widget-header"> {{ widget.title }}</div>
+                <div class="widget-content">
+                    Loading...
+                </div>
+
+                </div>
+            {% endif %}
+                
+
                     
             {% endfor %}
         </div>
