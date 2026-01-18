@@ -154,3 +154,8 @@ h1 {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
+.stats_text {
+    /* font-weight:; */
+    font-size: 1.1rem;
+}

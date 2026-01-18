@@ -65,6 +65,13 @@ widgets:
     type: timer
     title: Timer
 
+  - id: pc_stats-main
+    x: 1
+    y: 4
+    width: 2
+    height: 3
+    type: pc_stats
+    title: Stats
 
 
 

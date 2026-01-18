@@ -359,6 +359,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         }
 
+        function pc_stats() {
+
+            document.querySelectorAll(".pc_stats-widget").forEach(widget => {
+
+                const widget_content = widget.querySelector(".widget-content");
+
+                function update_stats() {
+                    fetch("/pcstats")
+                    .then(res => res.json())
+                    .then(data =>{
+
+                        const cpu = data.cpu_percent;
+                        const ram = data.ram_percent;
+                        const disk = data.disk_percent;
+
+                        widget_content.innerHTML = `
+                        <span class = "stats_text">CPU Usage</span> - ${cpu}%<br>
+                        <span class = "stats_text">RAM Usage</span> - ${ram}%<br>
+                        <span class = "stats_text">Disk Usage</span> - ${disk}%<br>
+                        `;
+                    }); 
+                }
+
+                update_stats();
+                setInterval(update_stats, 1000);
+            });
+        }
+
 
     loadTodos();
     attachToggle();
@@ -369,6 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hackatime();
     clock();
     timer();
+    pc_stats();
 
 
 });
