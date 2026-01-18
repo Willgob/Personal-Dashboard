@@ -1,3 +1,3 @@
 ## Hello there :D
 
-This is a dashboard that i maade better readme comming soon :D
+This is a dashboard that i made better readme comming soon :D
