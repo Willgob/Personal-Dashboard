@@ -85,6 +85,26 @@ widgets:
       - disk-usage
       - ram-usage
 
+  - id: app_launch-main
+    x: 8
+    y: 1
+    width: 1
+    height: 2
+    type: app_launcher
+    title: Apps
+    apps: 
+      - name: Kicad
+        command: kicad
+        display_type: text
 
+      - name: Settings
+        command: systemsettings
+        image: settings.png
+        display_type: image
+
+      - name: Settings
+        command: systemsettings
+        image: settings.png
+        display_type: image
 
   

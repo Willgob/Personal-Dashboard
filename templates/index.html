@@ -184,6 +184,34 @@
                 </div>
             {% endif %}
                 
+            {% if widget.type == "app_launcher" %}
+                <div class="widget app-launcher-widget"
+                data-x="{{ widget.x }}"
+                data-y="{{ widget.y }}"
+                data-width="{{ widget.width }}"
+                data-height="{{ widget.height }}"
+                data-widget-id="{{ widget.id }}"
+                data-display-type="{{widget.display_type}}">
+                
+                <div class="widget-header"> {{ widget.title }}</div>
+                <div class="widget-content">
+                    {% for app in widget.apps %}
+
+                        {% if app.display_type == "text" %}
+                            <button class="app-launch-button" data-cmd="{{ app.command }}"> {{ app.name }}</button>
+                        {% endif %}
+
+                        {% if app.display_type == "image" %}
+                            <button class="app-launch-button" data-cmd="{{ app.command }}">
+                                <img class="app-launch-image" src="/static/icons/{{ app.image }}" alt="{{ app.name }}">
+                            </button>
+                        {% endif %}
+
+                    {% endfor %}
+                </div>
+
+                </div>
+            {% endif %}
 
                     
             {% endfor %}

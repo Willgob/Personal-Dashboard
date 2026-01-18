@@ -427,6 +427,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
+        function app_launcher() {
+            document.querySelectorAll(".app-launch-button").forEach(button =>{
+                button.onclick = () => {
+                    fetch("/apprun", {
+                        method: "POST",
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify({cmd : button.dataset.cmd})
+                    });
+                }
+            });
+        }
+
     loadTodos();
     attachToggle();
     addTodo();
@@ -438,6 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
     timer();
     pc_stats();
     pc_stats_advanced();
+    app_launcher();
 
 
 });

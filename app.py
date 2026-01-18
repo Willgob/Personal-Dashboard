@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import yaml
 import psutil
 import requests
@@ -35,6 +35,18 @@ def pcstats():
              "disk_percent" : disk.percent
 
         }
+
+@app.route("/apprun", methods=["POST"])
+def run_command():
+    import subprocess, shlex
+    cmd = request.json.get("cmd")
+
+    try:
+        subprocess.Popen(shlex.split(cmd))
+        return{"ok" : True}
+    except Exception as e:
+        return{"ok": False, "error": str(e)}
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5050)
