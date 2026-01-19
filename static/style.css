@@ -169,11 +169,11 @@ input[type="number"] {
     margin-bottom: 5px;
 }
 
-.app-launch-button:hover {
-    background-color: #5e708f;
-    transform: translateY(-2px);
-    transform: scale(1.05);
-}
+    .app-launch-button:hover {
+        background-color: #5e708f;
+        transform: translateY(-2px);
+        transform: scale(1.05);
+    }
 
 .app-launch-image {
     width: 30px;

@@ -6,7 +6,6 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
-
 def load_dashboard_config():
     with open('config/dashboard.yaml', 'r') as file:
         config = yaml.safe_load(file)
@@ -46,6 +45,63 @@ def run_command():
         return{"ok" : True}
     except Exception as e:
         return{"ok": False, "error": str(e)}
+    
+
+@app.route("/hackatime/today")
+def hackatime():
+     config = load_dashboard_config()
+     print("widgets:")
+     for w in config["widgets"]:
+            if w.get("type") == "hackatime":
+                print(w)
+
+     widget = next((w for w in config["widgets"] if w["type"] == "hackatime"), None)
+     username = widget.get("username")
+     API_key = widget.get("API")
+
+     url = f"https://hackatime.hackclub.com/api/hackatime/v1/users/{username}/statusbar/today"
+     headers = {"Authorization" : f"Bearer {API_key}"}
+
+     r = requests.get(url, headers=headers)
+     data = r.json()
+     print(r.status_code)
+     print(r.text)
+
+     if "error" in data:
+        return{
+            "error" : data['error']
+        }
+     grand_total = data['data']['grand_total']
+
+    #  return data
+
+     return{
+         "Time Today": grand_total['text']
+     }
+
+@app.route("/hackatime/data")
+def hackatime_data():
+     config = load_dashboard_config()
+     print("widgets:")
+     for w in config["widgets"]:
+            if w.get("type") == "hackatime":
+                print(w)
+
+     widget = next((w for w in config["widgets"] if w["type"] == "hackatime"), None)
+     username = widget.get("username")
+     API_key = widget.get("API")
+
+     url = f"https://hackatime.hackclub.com/api/v1/users/{username}/stats"
+     headers = {"Authorization" : f"Bearer {API_key}"}
+
+     r = requests.get(url, headers=headers)
+     data = r.json()
+     print(r.status_code)
+     print(r.text)  
+
+
+
+     return data
 
 
 if __name__ == '__main__':

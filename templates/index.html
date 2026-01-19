@@ -207,6 +207,13 @@
                             </button>
                         {% endif %}
 
+                        {% if app.display_type == "both" %}
+                            <button class="app-launch-button" data-cmd="{{ app.command }}">
+                                <img class="app-launch-image" src="/static/icons/{{ app.image }}" alt="{{ app.name }}">
+                                <div> {{ app.name }} </div>
+                            </button>
+                        {% endif %}
+
                     {% endfor %}
                 </div>
 

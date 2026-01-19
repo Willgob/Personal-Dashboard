@@ -48,6 +48,8 @@ widgets:
     type: hackatime
     title: Hackatime
     project: Personal-Dashboard
+    username: Willgob
+    API: API HERE
 
   - id: clock-main
     x: 1
@@ -105,6 +107,8 @@ widgets:
       - name: Settings
         command: systemsettings
         image: settings.png
-        display_type: image
+        display_type: both
+
+      
 
   

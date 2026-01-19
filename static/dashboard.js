@@ -233,28 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    async function Hackatime() {
-        const API = "f613f08e-3ce3-4784-b873-9ec843cbbf05"; // hide thisss
-
-        document.querySelectorAll('.hackatime-widget').forEach(async (widget) => {
-            const project = widget.dataset.project;
-            const content = widget.querySelector('.widget-content');
-
-            const date = new Date();
-            const end_date = date.toISOString().split('T')[0];
-            const start_date = "2025-01-01";
-            const url = `https://hackatime.com/api/v1/users/current/stats`;
-
-            const response = await fetch(url, {
-                headers: {"Authorization": `Bearer ${API}`}
-            });
-
-            const data = await response.json();
-            console.log(data);
-
-
-        });
-    }
 
     function clock() {
         const time_html = document.getElementById("time-clock");
@@ -439,13 +417,39 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        
+        async function Hackatime() {
+            const res = await fetch("/hackatime/today");
+            const data = await res.json();
+
+            const res2 = await fetch("/hackatime/data");
+            const data2 = await res2.json();
+
+            time_today = data["Time Today"];
+            username = data2.data.username;
+            total_time = data2.data.human_readable_total;
+            trust = data2.trust_factor.trust_level;
+
+            document.querySelector(".hackatime-loading").innerHTML = `
+            <span class="hackatime-time-today">Today - ${time_today}</span>
+            <hr>
+            <span class="hackatime-username">Username - ${username}</span>
+            <br>
+            <span class="hackatime-project">Total Time - ${total_time} </span>
+            <br>
+            <span class="hackatime-trust">Trust Level - ${trust}</span>
+            `;
+
+        }
+
+
     loadTodos();
     attachToggle();
     addTodo();
     Reset();
     Weather();
     GridSetup();
-    // Hackatime();
+    Hackatime();
     clock();
     timer();
     pc_stats();
