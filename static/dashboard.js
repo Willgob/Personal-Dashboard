@@ -530,6 +530,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        async function Lyrics(artist, title) {
+            const res = await fetch(`/audio/lyrics/${encodeURIComponent(artist)}/${encodeURIComponent(title)}`);
+            const data = await res.json();
+            if(data.lyrics) {
+                display_lyrics(data.lyrics);
+            } else {
+                console.error("No lyrics found");
+            }
+        }
+
+        function display_lyrics(lines) {
+            const audio_lyrics = document.getElementById("audio-lyrics");
+            audio_lyrics.innerHTML = '';
+            lines.forEach(line => {
+                const p = document.createElement('p');
+                p.textContent = line;
+                audio_lyrics.appendChild(p);
+            });
+        }
 
 
 
@@ -546,7 +565,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pc_stats_advanced();
     app_launcher();
     Audio_function();
-
+    Lyrics(data.artist, data.title);
     setInterval(Audio_function, 1000);
 
 

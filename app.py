@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, jsonify
 import yaml
 import psutil
 import requests
@@ -204,6 +204,14 @@ def audio_volume_down():
 def audio_volume():
         volume = get_system_volume()
         return {"volume" : volume}
+
+@app.route("/audio/lyrics/<artist>/<title>")
+def lyrics(artist, title):
+     res = requests.get(f"https://api.lyrics.ovh/v1/{artist}/{title}")
+     data = res.json()
+     lyrics= data.get("lyrics", "")
+     lines = [line.strip() for line in lyrics.split("\n") if line.strip()]
+     return jsonify({"lyrics": lines})
 
 
 if __name__ == '__main__':
