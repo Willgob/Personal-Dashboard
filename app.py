@@ -5,9 +5,13 @@ import requests
 from datetime import datetime, timedelta
 import dbus
 import subprocess
-import re
+import time
+import pyperclip
+from threading import Thread
 
 app = Flask(__name__)
+
+clipboard_history = []
 
 def load_dashboard_config():
     with open('config/dashboard.yaml', 'r') as file:
@@ -213,6 +217,25 @@ def lyrics(artist, title):
      lines = [line.strip() for line in lyrics.split("\n") if line.strip()]
      return jsonify({"lyrics": lines})
 
+def clipboard():
+     last_text = ""
+     while True:
+         try: 
+            text = pyperclip.paste()
+            if text != last_text:
+                last_text = text
+                clipboard_history.insert(0, text)
+                if len(clipboard_history) > 15:
+                        clipboard_history.pop()
+         except Exception as e:
+            print("Clipboard error:", e)
+         time.sleep(0.5)
+
+Thread(target=clipboard, daemon=True).start()
+
+@app.route("/clipboard/history")
+def get_clipboard_history():
+    return jsonify({"history": clipboard_history})
 
 if __name__ == '__main__':
     app.run(debug=True, port=5050)

@@ -239,7 +239,7 @@
                     <span id="audio-current-time" class="audio-current-time"> Loading... </span>
                 </div>
 
-                <div id="audio-lyrics" class="audio-lyrics"> Loading... </div>
+                <!-- <div id="audio-lyrics" class="audio-lyrics"> Loading... </div> -->
 
                 <input type="range" id="audio-bar" class="audio-bar" min="0" max="100" value="0" step="1">
 
@@ -268,7 +268,22 @@
                         <span id="audio-volume" class="audio-volume audio-text"> Loading... </span>
                     </div>
                 </div>
-                
+            </div>
+            {% endif %}
+
+            {% if widget.type == "clipboard" %}
+            <div class="widget clipboard-widget"
+                data-x = "{{widget.x}}"
+                data-y = "{{ widget.y }}"
+                data-width = "{{ widget.width }}"
+                data-height = "{{ widget.height }}"
+                data-widget-id = "{{ widget.id }}">
+            
+                <div class="widget-header"> {{ widget.title }} </div>
+                <div class="widget-content">
+                    <div id ="clipboard-content" class="clipboard-content"> Loading... </div>
+                </div>
+
             </div>
             {% endif %}
                     

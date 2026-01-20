@@ -550,6 +550,26 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        async function clipboard() {
+            const res = await fetch("/clipboard/history");
+            const data = await res.json();
+
+            const clipboard_content = document.getElementById("clipboard-content")
+            if (!clipboard_content) return;
+            clipboard_content.innerHTML = ``;
+
+            data.history.forEach(item => {
+                const div = document.createElement('div');
+                div.className="clipboard-item";
+                div.textContent = item;
+
+                div.onclick=() => {
+                    navigator.clipboard.writeText(item);
+                };
+                clipboard_content.appendChild(div);
+            });
+        }
+
 
 
     loadTodos();
@@ -565,7 +585,9 @@ document.addEventListener('DOMContentLoaded', () => {
     pc_stats_advanced();
     app_launcher();
     Audio_function();
-    Lyrics(data.artist, data.title);
+    clipboard();
+    // Lyrics(data.artist, data.title);
+    setInterval(clipboard, 5000);
     setInterval(Audio_function, 1000);
 
 
