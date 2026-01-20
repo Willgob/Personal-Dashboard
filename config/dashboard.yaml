@@ -110,5 +110,20 @@ widgets:
         display_type: both
 
       
+  - id: audio-main
+    x: 7
+    y: 3
+    width: 3
+    height: 2
+    type: audio
+    title: Audio
 
+
+  - id: volume-main
+    x: 9
+    y: 2
+    width: 1
+    height: 1
+    type: volume
+    title: Volume
   

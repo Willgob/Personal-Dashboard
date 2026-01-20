@@ -1,8 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 import yaml
 import psutil
 import requests
 from datetime import datetime, timedelta
+import dbus
+import subprocess
+import re
 
 app = Flask(__name__)
 
@@ -99,9 +102,108 @@ def hackatime_data():
      print(r.status_code)
      print(r.text)  
 
-
-
      return data
+
+
+def get_current_audio():
+     session_bus = dbus.SessionBus()
+     players = [name for name in session_bus.list_names() if name.startswith('org.mpris.MediaPlayer2.')]
+     if not players:
+            return {"Error": "No audio players found"}
+     
+     player = session_bus.get_object(players[0], '/org/mpris/MediaPlayer2')
+     props = dbus.Interface(player, 'org.freedesktop.DBus.Properties')
+
+     metadata = props.Get('org.mpris.MediaPlayer2.Player', 'Metadata')
+     status = props.Get('org.mpris.MediaPlayer2.Player', 'PlaybackStatus')
+     position = props.Get('org.mpris.MediaPlayer2.Player', 'Position')
+
+     title = metadata.get('xesam:title', 'Unknown Title')
+     artists = metadata.get('xesam:artist', [])
+     artist = ", ".join((str(a) for a in artists)) if artists else 'Unknown Artist'
+
+     length = metadata.get('mpris:length', 0)
+     picture_cover = metadata.get('mpris:artUrl', '')
+
+
+     return{
+          "title": str(title), 
+          "artist": str(artist),
+          "status": str(status),
+          "position": int(position) // 1000000,
+          "length": int(length) // 1000000,
+          "cover" : picture_cover
+          }
+
+@app.route("/audio/current")
+def audio_current():
+     return get_current_audio()
+
+def get_playing_audio():
+    bus = dbus.SessionBus()
+    players = [name for name in bus.list_names() if name.startswith("org.mpris.MediaPlayer2")]
+    if not players:
+         return None
+    return bus.get_object(players[0], "/org/mpris/MediaPlayer2")
+
+
+@app.route("/audio/play_pause", methods=["GET", "POST"])
+def audio_play_pause():
+     player = get_playing_audio()
+     if player is None:
+         return {"error": "No audio player found"}
+     dbus_interface = dbus.Interface(player, "org.mpris.MediaPlayer2.Player").PlayPause()
+     return {"status": "toggled"}
+
+
+@app.route("/audio/next", methods=["GET", "POST"])
+def audio_next():
+        player = get_playing_audio()
+        if player is None:
+            return {"error": "No audio player found"}
+        dbus_interface = dbus.Interface(player, "org.mpris.MediaPlayer2.Player").Next()
+        return {"status": "skipped"}
+
+
+@app.route("/audio/previous", methods=["GET", "POST"])
+def audio_previous():
+    player = get_playing_audio()
+    if player is None:
+         return {"error": "No audio player found"}
+    dbus_interface = dbus.Interface(player, "org.mpris.MediaPlayer2.Player").Previous()
+    return {"status": "previous"}
+
+
+@app.route("/audio/seek", methods=["GET", "POST"])
+def audio_seek():
+     data = request.get_json()
+     position_current = data.get("position", 0)
+     player = get_playing_audio()
+     player_interface = dbus.Interface(player, "org.mpris.MediaPlayer2.Player")
+     player_interface.SetPosition("/org/mpris/MediaPlayer2", position_current * 1000000)
+     return {"status": "seeked"}
+
+     
+def get_system_volume():
+     out = subprocess.check_output(["wpctl", "get-volume", "@DEFAULT_AUDIO_SINK@"]).decode()
+     vol_str = out.split()[1]
+     vol = float(vol_str)
+     return int(vol * 100)
+
+@app.route("/audio/volume_up", methods=["GET", "POST"])
+def audio_volume_up():
+     subprocess.call(["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "3%+"])
+     return {"volume" : get_system_volume()}
+
+@app.route("/audio/volume_down", methods=["GET", "POST"])
+def audio_volume_down():
+     subprocess.call(["wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "3%-"])
+     return {"volume" : get_system_volume()}
+
+@app.route("/audio/volume")
+def audio_volume():
+        volume = get_system_volume()
+        return {"volume" : volume}
 
 
 if __name__ == '__main__':

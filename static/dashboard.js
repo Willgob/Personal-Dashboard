@@ -1,5 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+
     function SaveTodos() {
         const todos = {};
         document.querySelectorAll('.widget').forEach(widget => {
@@ -443,6 +450,89 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
+
+        const audio_bar = document.getElementById("audio-bar");
+        let isDragging = false;
+
+
+        window.audioPlayPause = async function () {
+            await fetch("/audio/play_pause", {method: "POST"});
+        }
+
+        window.audioNext = async function () {
+            await fetch("/audio/next", {method: "POST"});
+            audio_bar.value = 0;
+        }
+
+        window.audioPrevious =async function  () {
+            await fetch("/audio/previous", {method: "POST"});
+            audio_bar.value = 0;
+        }
+        
+        window.audioVolumeUp = async function() {
+            await fetch("/audio/volume_up", {method: "POST"});
+        }
+
+        window.audioVolumeDown = async function () {
+            await fetch("/audio/volume_down", {method: "POST"});
+        }
+        
+        audio_bar.addEventListener("input", (e) => {
+            isDragging = true;
+            document.getElementById("audio-current-time").textContent = formatTime(parseInt(e.target.value));
+        });
+
+        audio_bar.addEventListener("change", async (e)=> {
+            const new_time = e.target.value;
+            await fetch("/audio/seek", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({position: parseInt(new_time)})
+            });
+            isDragging = false;
+        });
+
+
+
+        async function Audio_function() {
+            const res = await fetch("audio/current");
+            const data = await res.json();
+            // const audio_bar = document.getElementById("audio-bar");
+
+            const res2 = await fetch("audio/volume");
+            const data2 = await res2.json();
+
+            console.log(data);
+
+            artist = data.artist;
+            title = data.title;
+            status_audio = data.status;
+            cover = data.cover;
+            audio_time_int = data.length;
+            audio_current_time_int = data.position;
+            audio_time = formatTime(audio_time_int);
+            audio_current_time = formatTime(audio_current_time_int);
+            volume = data2.volume;
+
+            document.getElementById("audio-artist").textContent = artist;
+            document.getElementById("audio-title").textContent = title;
+            // document.getElementById("audio-cover").src = /static/default_cover.png;
+            document.getElementById("audio-status").textContent = status_audio;
+            document.getElementById("audio-time").textContent = audio_time;
+            document.getElementById("audio-current-time").textContent = audio_current_time;
+            document.getElementById("audio-volume").textContent = `Volume - ${volume}%`;
+
+
+            if(!isDragging) {
+                audio_bar.max = data.length;
+                audio_bar.value = data.position;
+
+            }
+        }
+
+
+
+
     loadTodos();
     attachToggle();
     addTodo();
@@ -455,6 +545,9 @@ document.addEventListener('DOMContentLoaded', () => {
     pc_stats();
     pc_stats_advanced();
     app_launcher();
+    Audio_function();
+
+    setInterval(Audio_function, 1000);
 
 
 });

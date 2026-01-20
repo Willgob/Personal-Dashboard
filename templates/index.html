@@ -220,6 +220,55 @@
                 </div>
             {% endif %}
 
+            {% if widget.type == "audio" %}
+                <div class="widget audio-widget"
+                data-x = "{{ widget.x }}"
+                data-y="{{ widget.y }}"
+                data-width="{{ widget.width }}"
+                data-height="{{ widget.height }}"
+                data-widget-id="{{ widget.id }}">
+
+                <div class="widget-header"> {{widget.title}} </div>
+                <!-- <img id="audio-cover" src="/static/defult_cover.png"> -->
+                <div id="audio-title" class="audio-text audio-title"> Loading... </div>
+                <div id="audio-artist" class="audio-text audio-artist"> Loading... </div>
+
+                <div class="audio-time-div">
+                    <span id="audio-time" class="audio-text audio-time"> Loading... </span>
+                    <span id="audio-status" class="audio-text audio-status"> Loading... </span>
+                    <span id="audio-current-time" class="audio-current-time"> Loading... </span>
+                </div>
+
+                <input type="range" id="audio-bar" class="audio-bar" min="0" max="100" value="0" step="1">
+
+                <!-- <hr> -->
+                <div class="audio-button-div">
+                    <button id="audio-Previous" class= "audio-button" onclick = "audioPrevious()"> Previous </button>
+                    <button id="audio-play-pause" class= "audio-button" onclick = "audioPlayPause()"> Play/Pause </button>
+                    <button id="audio-Next" class= "audio-button" onclick = "audioNext()"> Next </button>
+                </div>
+
+                </div>
+            {% endif %}
+
+            {% if widget.type == "volume" %}
+                <div class="widget volume-widget"
+                data-x = "{{ widget.x }}"
+                data-y = "{{ widget.y}}"
+                data-width = "{{ widget.width}}"
+                data-height = " {{ widget.height }}"
+                data-widget-id = " {{ widget.id}}">
+                <div class="widget-header"> {{ widget.title }} </div>
+                <div class="widget-content">
+                    <div class="audio-button-div">
+                        <button class="audio-button volume-button volume-button-left" onclick="audioVolumeDown()"> Vol - </button>
+                        <button class="audio-button volume-button" onclick="audioVolumeUp()"> Vol + </button>
+                        <span id="audio-volume" class="audio-volume audio-text"> Loading... </span>
+                    </div>
+                </div>
+                
+            </div>
+            {% endif %}
                     
             {% endfor %}
         </div>

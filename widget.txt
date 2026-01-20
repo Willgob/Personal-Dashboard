@@ -22,7 +22,7 @@ github stats
 ping
 homeassistant
 spotify/audio
-github dots thing
+github dots     
 alarm
 todo list upgrade
 school assesment
