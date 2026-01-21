@@ -273,3 +273,9 @@ input[type="number"] {
 .volume-widget {
     text-align: center;
 }
+
+.clipboard-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
