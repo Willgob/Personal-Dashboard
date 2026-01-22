@@ -217,21 +217,52 @@ def lyrics(artist, title):
      lines = [line.strip() for line in lyrics.split("\n") if line.strip()]
      return jsonify({"lyrics": lines})
 
-def clipboard():
-     last_text = ""
-     while True:
-         try: 
-            text = pyperclip.paste()
-            if text != last_text:
-                last_text = text
-                clipboard_history.insert(0, text)
-                if len(clipboard_history) > 15:
-                        clipboard_history.pop()
-         except Exception as e:
-            print("Clipboard error:", e)
-         time.sleep(0.5)
+# def clipboard():
+#      last_text = ""
+#      while True:
+#          try: 
+#             text = pyperclip.paste()
+#             if text != last_text:
+#                 last_text = text
+#                 clipboard_history.insert(0, text)
+#                 if len(clipboard_history) > 15:
+#                         clipboard_history.pop()
+#          except Exception as e:
+#             print("Clipboard error:", e)
+#          time.sleep(0.5)
 
-Thread(target=clipboard, daemon=True).start()
+def get_clipboard_history():
+     try:
+          return subprocess.check_output(
+               ["wl-paste", "--no-newline"],
+               text= True 
+          ).strip()
+     except subprocess.CalledProcessError:
+          return ""
+
+
+def poll_clipboard():
+
+     initial = get_clipboard_history()
+     if initial:
+          clipboard_history.insert(0, initial)
+
+     proc = subprocess.Popen(
+          ["wl-paste", "--watch"],
+          stdout=subprocess.PIPE,
+          stderr = subprocess.DEVNULL,
+          text =True
+     )
+
+     for line in proc.stdout:
+          text = line.strip()
+          if text and (not clipboard_history or text != clipboard_history[0]):
+               clipboard_history.insert(0, text)
+               clipboard_history[:] = clipboard_history[:15]
+
+Thread(target=poll_clipboard, daemon=True).start()
+
+
 
 @app.route("/clipboard/history")
 def get_clipboard_history():

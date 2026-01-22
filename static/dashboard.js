@@ -550,32 +550,22 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        let pauseClipboard = false;
         let lastClipboard = [];
-
-        document.addEventListener("mousedown", (e) => {
-            if (e.button === 2) pauseClipboard = true;
-        });
-
-        document.addEventListener("mouseup", () => {
-            pauseClipboard = false;
-        });
 
         async function clipboard() {
             const res = await fetch("/clipboard/history");
             const data = await res.json();
-
-            if(pauseClipboard) return;
+            console.log(data);
 
             if (JSON.stringify(data.history) === JSON.stringify(lastClipboard)) {
                 return;
             }
 
-            lastClipboard = data.history;
-
-            const clipboard_content = document.getElementById("clipboard-content")
-            clipboard_content.replaceChildren();
+            const clipboard_content = document.getElementById("clipboard-content");
             if (!clipboard_content) return;
+
+
+            clipboard_content.replaceChildren();
 
             data.history.forEach(item => {
                 const div = document.createElement('div');

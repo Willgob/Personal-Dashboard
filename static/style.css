@@ -278,4 +278,5 @@ input[type="number"] {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+margin-bottom: 5px;
 }
