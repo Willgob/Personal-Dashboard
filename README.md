@@ -30,7 +30,40 @@
 
 #####       Feel free to contact me at @Willgob
 
+Basic Knowledge on how to run
+Inside YAML, Each widget has to have some classes:
+Please use the Template below to start of every widget:
+
+```YAML
+  - id: type-main
+    type: ___
+    title: ___
+    x: _
+    y: _
+    width: _
+    height: _
+```
+
+Make sure the type is one of the vaild ones:
+
+* Links
+* todos
+* weather
+* hackatime
+* clock
+* timer
+* pc_stats
+* pc_stats_advanced
+* app_launcher
+* audio
+* volume
+* clipboard
+* mail
+
+'title' is where you put what title the widget should show it can be anything.
+'x' and 'y' is where you want the widget. The display is split into a grid.
+'width' and 'height' is pretty self explanatory it is how big you want the widget to be.
 
 ### Widgets:
 
-####
+#### 
