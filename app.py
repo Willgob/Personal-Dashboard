@@ -8,10 +8,14 @@ import subprocess
 import time
 import pyperclip
 from threading import Thread
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
 
 clipboard_history = []
+Hackatime_API_KEY = os.getenv("HACKATIME_API_KEY")
+print (Hackatime_API_KEY)
 
 def load_dashboard_config():
     with open('config/dashboard.yaml', 'r') as file:
@@ -64,7 +68,8 @@ def hackatime():
 
      widget = next((w for w in config["widgets"] if w["type"] == "hackatime"), None)
      username = widget.get("username")
-     API_key = widget.get("API")
+     API_key = Hackatime_API_KEY
+
 
      url = f"https://hackatime.hackclub.com/api/hackatime/v1/users/{username}/statusbar/today"
      headers = {"Authorization" : f"Bearer {API_key}"}
@@ -96,7 +101,7 @@ def hackatime_data():
 
      widget = next((w for w in config["widgets"] if w["type"] == "hackatime"), None)
      username = widget.get("username")
-     API_key = widget.get("API")
+     API_key = Hackatime_API_KEY
 
      url = f"https://hackatime.hackclub.com/api/v1/users/{username}/stats"
      headers = {"Authorization" : f"Bearer {API_key}"}

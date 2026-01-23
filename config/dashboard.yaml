@@ -49,7 +49,7 @@ widgets:
     title: Hackatime
     project: Personal-Dashboard
     username: Willgob
-    API: API HERE
+    # API: API HERE
 
   - id: clock-main
     x: 1
