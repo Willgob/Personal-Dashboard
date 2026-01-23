@@ -10,6 +10,7 @@ import pyperclip
 from threading import Thread
 from dotenv import load_dotenv
 import os
+from bambu_connect import BambuClient
 
 app = Flask(__name__)
 
@@ -289,8 +290,19 @@ def mail():
      data = r.json()
      print(r.status_code)
      print(r.text)  
-
      return data
+
+Printer_IP = os.getenv("BAMBU_IP")
+ACCESS_CODE = os.getenv("BAMBU_ACCESS_CODE")
+SERIAL = os.getenv("BAMBU_SERIAL")
+
+@app.route("/Bambulab/status", methods=["GET", "POST"])
+def status():
+     client = BambuClient(Printer_IP, ACCESS_CODE, SERIAL)
+     client.connect()
+
+     status = client.watch.get_status()
+     return status
 
 
 if __name__ == '__main__':
