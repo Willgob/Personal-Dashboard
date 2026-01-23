@@ -17,6 +17,8 @@ clipboard_history = []
 Hackatime_API_KEY = os.getenv("HACKATIME_API_KEY")
 print (Hackatime_API_KEY)
 
+MAIL_API_KEY = os.getenv("MAIL_API_KEY")
+
 def load_dashboard_config():
     with open('config/dashboard.yaml', 'r') as file:
         config = yaml.safe_load(file)
@@ -272,6 +274,22 @@ Thread(target=poll_clipboard, daemon=True).start()
 @app.route("/clipboard/history")
 def get_clipboard_history():
     return jsonify({"history": clipboard_history})
+
+@app.route("/mail/mail", methods=["GET", "POST"])
+def mail():
+     username = "me"
+     API_key = MAIL_API_KEY
+
+     url = f"https://mail.hackclub.com/api/public/v1/letters"
+     headers = {"Authorization" : f"Bearer {API_key}"}
+
+     r = requests.get(url, headers=headers)
+     data = r.json()
+     print(r.status_code)
+     print(r.text)  
+
+     return data
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5050)
