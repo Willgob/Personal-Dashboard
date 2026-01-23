@@ -561,6 +561,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            lastClipboard = data.history;
+
             const clipboard_content = document.getElementById("clipboard-content");
             if (!clipboard_content) return;
 

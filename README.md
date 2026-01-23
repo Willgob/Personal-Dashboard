@@ -1,3 +1,3 @@
-## Hello there :D
+# Dashboard
+## A dashboard that allows customization through YAML
 
-This is a dashboard that i made better readme comming soon :D
