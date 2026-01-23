@@ -579,6 +579,33 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        async function mail() {
+            const res = await fetch("/mail/mail")
+            const data = await res.json();
+
+            mail_widget = document.getElementById("widget-mail-content");
+            mail_item = document.getElementById("mail-item")
+
+            const reverse_letters = [...data.letters].reverse();
+
+            reverse_letters.slice(0, 5).forEach(letter => {
+                const div = document.createElement("div");
+                div.className = "mail-item";
+                div.id = "mail-item"
+                
+                div.innerHTML = `${letter.title}`
+                let mail = letter.title;
+                // mail_widget.innerHTML = JSON.stringify(mail).replace(/^["']|["']$/g, "");
+                mail_widget.appendChild(div);
+
+                div.addEventListener('click', function(){
+                    alert(
+                        `Title - ${letter.title} \nStatus - ${letter.status}\nCreated - ${letter.created_at}\nType - ${letter.type}\nTags - ${letter.tags}`);
+                });
+            });
+            
+        }
+
 
 
     loadTodos();
@@ -595,6 +622,8 @@ document.addEventListener('DOMContentLoaded', () => {
     app_launcher();
     Audio_function();
     clipboard();
+    mail();
+
     // Lyrics(data.artist, data.title);
     setInterval(clipboard, 5000);
     setInterval(Audio_function, 2000);

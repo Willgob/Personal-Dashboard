@@ -275,6 +275,8 @@ Thread(target=poll_clipboard, daemon=True).start()
 def get_clipboard_history():
     return jsonify({"history": clipboard_history})
 
+
+
 @app.route("/mail/mail", methods=["GET", "POST"])
 def mail():
      username = "me"
@@ -293,3 +295,4 @@ def mail():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5050)
+

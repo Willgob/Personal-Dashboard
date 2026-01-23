@@ -280,3 +280,21 @@ input[type="number"] {
     text-overflow: ellipsis;
 margin-bottom: 5px;
 }
+
+.mail-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+    color: #bebedc;
+    background-color: #6d6d9a;
+    border-radius: 5px;
+    border:none;
+    padding: 3px 6px;
+}
+
+.mail-item:hover {
+    background-color: #5e708f;
+    transform: translateY(-2px);
+    transform: scale(1.05); 
+}

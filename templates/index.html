@@ -287,6 +287,22 @@
             </div>
             {% endif %}
                     
+            {% if widget.type == "mail" %}
+                <div class="widget mail-widget"
+                data-x = "{{ widget.x }}"
+                data-y = "{{ widget.y }}"
+                data-width = "{{ widget.width }}"
+                data-height = "{{ widget.height }}"
+                data-widget-id = "{{ widget.id }}">
+
+                <div class="widget-header"> {{ widget.title }}</div>
+                <div id="widget-content">
+                    <div id="widget-mail-content"> </div>
+                </div>
+            
+                </div>
+            {% endif %}
+
             {% endfor %}
         </div>
             
