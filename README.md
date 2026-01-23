@@ -4,13 +4,13 @@
 ### Developer: @Willgob
 
 ### How to operate:
-    1. Download the repo 
-    2. Download all libraries inside requirements.txt
-    3. open dashboard.yaml
-    4. edit dashboard.yaml with whatever you want
-    5. Please put your api keys in a .env with Hackatime api key name as : HACKATIME_API_KEY and Mail api key as MAIL_API_KEY
-    6. start the py program
-    7. go to 127.0.0.1:5050
+1. Download the repo 
+2. Download all libraries inside requirements.txt
+3. open dashboard.yaml
+4. edit dashboard.yaml with whatever you want
+5. Please put your api keys in a .env with Hackatime api key name as : HACKATIME_API_KEY and Mail api key as MAIL_API_KEY
+6. start the py program
+7. go to 127.0.0.1:5050
 
 ### Troubleshooting:
 ####     Port 5050 is taken?
