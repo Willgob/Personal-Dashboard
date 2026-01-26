@@ -24,7 +24,7 @@ h1 {
 }
 
 .widget {
-    background-color: #2a2a3f;
+    background-color: var(--widget_background);
     border-radius: 12px;
     padding: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
@@ -38,7 +38,7 @@ h1 {
 .widget-header {
     font-weight: bold;
     margin-bottom: 10px;
-    color: #c4d7f5;
+    color: var(--widget_header);
 }
 
 .widget-content li {
@@ -47,13 +47,13 @@ h1 {
 }
 
 .widget-content a {
-    color: #4f9cff;
+    color: var(--widget_content_a);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .widget-content a:hover {
-    color: #82b0ff;
+    color: var(--widget_content_a_hover);
     cursor: pointer;
     text-decoration: underline;
 }
@@ -62,11 +62,11 @@ h1 {
     list-style: none;
     padding: 0;
     margin: 0;
-    color: #4f9cff;
+    color: var(--widget_content_ul);
 }
 
 .widget-content s {
-    color: #888;
+    color: var(--widget_content_s);
 }
 
 /* .weather-widget {
@@ -82,7 +82,7 @@ h1 {
     font-style: oblique 5deg;
     font-size: 1.3rem;
     /* color: cadetblue; */
-    color: #83aae0;
+    color: var(--weather_location);
 }
 
 
@@ -94,15 +94,15 @@ h1 {
 }
 
 .todo-controls button {
-    color: #bebedc;
-    background-color: #6d6d9a;
+    color: var(--button_text_color);
+    background-color: var(--button_background);
     border-radius: 5px;
     border: none;
     padding: 3px 6px;
 }
 
 .todo-controls button:hover {
-    background-color: #5e708f;
+    background-color: var(--button_hover);
     transform: translateY(-2px);
     transform: scale(1.05);
 }
@@ -113,16 +113,16 @@ h1 {
     margin-left: -5px;
 }
 .todo-input {
-    color: #fff;
-    background-color: #474764;
+    color: var(--input_text_color);
+    background-color: var(--input_background_color);
     border-radius: 100px;
     padding: 5px 5px;
     border: none;
 }
 
 .hours-timer, .minutes-timer, .seconds-timer {
-    color: #fff;
-    background-color: #474764;
+    color: var(--input_text_color);
+    background-color: var(--input_background_color);
     border-radius: 100px;
     padding: 5px 5px;
     border: none;
@@ -137,15 +137,15 @@ h1 {
 
 
 .controls-timer button{
-    color: #bebedc;
-    background-color: #6d6d9a;
+    color: var(--button_text_color);
+    background-color: var(--button_background);
     border-radius: 5px;
     border: none;
     padding: 3px 6px;
 }
 
 .controls-timer button:hover{
-    background-color: #5e708f;
+    background-color: var(--button_hover);
     transform: translateY(-2px);
     transform: scale(1.05);
 }
@@ -161,8 +161,8 @@ input[type="number"] {
 }
 
 .app-launch-button {
-    color: #bebedc;
-    background-color: #6d6d9a;
+    color: var(--button_text_color);
+    background-color: var(--button_background);
     border-radius: 5px;
     border: none;
     padding: 3px 6px;
@@ -170,7 +170,7 @@ input[type="number"] {
 }
 
 .app-launch-button:hover {
-    background-color: #5e708f;
+    background-color: var(--button_hover);
     transform: translateY(-2px);
     transform: scale(1.05);
 }
@@ -184,8 +184,8 @@ input[type="number"] {
 }
 
 .audio-button {
-    color: #bebedc;
-    background-color: #6d6d9a;
+    color: var(--button_text_color);
+    background-color: var(--button_background);
     border-radius: 5px;
     border: none;
     padding: 3px 6px;
@@ -197,7 +197,7 @@ input[type="number"] {
 }
 
 .audio-button:hover {
-    background-color: #5e708f;
+    background-color: var(--button_hover);
     transform: translateY(-2px);
     transform: scale(1.05); 
 }
@@ -230,8 +230,8 @@ input[type="number"] {
     appearance: none;
     width: 100%;
     border-radius: 5px;
-    background:#3a3a58;
-    border:2px solid #464679;
+    background: var(--audio_bar_background);
+    border:2px solid var(--audio_bar_border);
     height: 8px;
     margin-bottom: 8px;
 }
@@ -240,14 +240,14 @@ input[type="number"] {
     width: 12px;
     height: 12px;
 
-    background: #1154ab;
+    background: var(--audio_bar_thumb);
     cursor: pointer;
     border-radius: 35%;
-    border: 1px solid #202e44;
+    border: 1px solid var(--audio_bar_thumb_border);
 }
 
 .audio-bar::-moz-range-progress {
-    background: #254267;
+    background: var(--audio_bar_time);
     height: 8px;
     border-radius: 8px;
 }
@@ -286,15 +286,15 @@ margin-bottom: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
     margin-bottom: 5px;
-    color: #bebedc;
-    background-color: #6d6d9a;
+    color: var(--button_text_color);
+    background-color: var(--button_background);
     border-radius: 5px;
     border:none;
     padding: 3px 6px;
 }
 
 .mail-item:hover {
-    background-color: #5e708f;
+    background-color: var(--button_hover);
     transform: translateY(-2px);
     transform: scale(1.05); 
 }
