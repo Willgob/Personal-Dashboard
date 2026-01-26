@@ -608,7 +608,15 @@ document.addEventListener('DOMContentLoaded', () => {
             
         }
 
+        async function quote() {
+            const res = await fetch("/quote/daily")
+            const data = await res.json();
 
+            quote_widget = document.getElementById("widget-quote-content")
+
+            quote_widget.innerHTML = `${data}`;
+
+        }
 
     loadTodos();
     attachToggle();
@@ -625,6 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Audio_function();
     clipboard();
     mail();
+    quote();
 
     // Lyrics(data.artist, data.title);
     setInterval(clipboard, 5000);

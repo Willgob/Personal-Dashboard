@@ -1,4 +1,14 @@
+quotes:
+  - "The best time to start was yesterday. The next best time is now."
+  - "Be yourself; everyoneelse is already taken"
+  - "Im selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can't handle me at my worst, then you sure as hell don't deserve ce at my best."
+  - "So many books, so little time."
+  - "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe"
+  - "A room without books is like a body without a soul."
+  - " Be who you are and say what you feel, because those who mind don't matter, and those who matter don't mind."
+
 widgets:
+
   - id: links-main
     type: links
     title: Quick Links
@@ -143,3 +153,15 @@ widgets:
     type: mail
     title: Mail
   
+  - id: quote-main
+    x: 9
+    y: 1
+    width: 3
+    height: 1
+    type: quote
+    title: Quote of the day
+
+theme: 
+  primary: "#1e1e2f"
+  text_color: "#e0e0e0"
+  title_color: "#ffffff"

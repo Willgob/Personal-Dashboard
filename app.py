@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, url_for, jsonify
 import yaml
 import psutil
 import requests
-from datetime import datetime, timedelta
+from datetime import timedelta
+import datetime
 import dbus
 import subprocess
 import time
@@ -10,7 +11,7 @@ import pyperclip
 from threading import Thread
 from dotenv import load_dotenv
 import os
-from bambu_connect import BambuClient
+import random
 
 app = Flask(__name__)
 
@@ -304,6 +305,25 @@ def status():
      status = client.watch.get_status()
      return status
 
+
+def quote_of_the_day():
+     config = load_dashboard_config()
+     Quotes = config.get("quotes", [])
+     today = datetime.date.today().toordinal()
+     return Quotes[today % len(Quotes)]
+
+@app.route("/quote/daily")
+def quote():
+     return jsonify(quote_of_the_day())
+
+def load_theme():
+     config = load_dashboard_config()
+     return config.get("theme", {})
+
+@app.route("/theme.css")
+def theme_css():
+     theme = load_theme()
+     return render_template("theme.css.j2", theme=theme), 200, {"Content-Type" : "text/css"}
 
 if __name__ == '__main__':
     app.run(debug=True, port=5050)
