@@ -295,7 +295,7 @@ def mail():
 
 Printer_IP = os.getenv("BAMBU_IP")
 ACCESS_CODE = os.getenv("BAMBU_ACCESS_CODE")
-SERIAL = os.getenv("BAMBU_SERIAL")
+SERIAL = os.getenv("BAMBU_USERNAME")
 
 @app.route("/Bambulab/status", methods=["GET", "POST"])
 def status():

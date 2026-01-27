@@ -3,9 +3,9 @@ import ssl
 import json
 import time, random, string
 
-printer_ip = "192.168.68.62"
-serial = "01P00C490400556"
-lan_code = "16dade9c"
+printer_ip = "<IP HERE>"
+serial = "bblp"
+lan_code = "<LAN CODE HERE>"
 
 client_id = "pdash_" + str(int(time.time()))
 
