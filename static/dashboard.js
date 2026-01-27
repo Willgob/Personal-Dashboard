@@ -631,6 +631,8 @@ document.addEventListener('DOMContentLoaded', () => {
             bambulab_widget.innerHTML = `${led_status}`;
             
         }
+        
+        sd
 
         window.bambu_light_on = async function() {
             await fetch("/Bambulab/light/on", {method: "POST"})
