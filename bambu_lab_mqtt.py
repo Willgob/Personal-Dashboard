@@ -14,6 +14,7 @@ printer_username = "bblp"
 password = os.getenv("BAMBU_ACCESS_CODE")
 
 latest_status = {}
+latest_snapshot = None
 
 def on_connect(client, userdata, flags, rc):
     print("MQTT Connected:", rc)
@@ -28,10 +29,10 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
-    global latest_status
+    global latest_status, latest_snapshot
     try:
         payload = json.loads(msg.payload.decode() )
-
+        print("Raw data", json.dumps(payload, indent=2))
         for key, value in payload.items():
             if key not in latest_status:
                 latest_status[key] = value
@@ -43,6 +44,7 @@ def on_message(client, userdata, msg):
 
         print(json.dumps(latest_status, indent=2))
         print("message")
+    
     except: pass
 
 def request_full_data(client, serial):
@@ -57,6 +59,7 @@ def request_full_data(client, serial):
     topic = f"device/{serial}/request"
     client.publish(topic, json.dumps(payload))
     print("requested full data")
+
 
 def send_command(client, serial, payload):
     topic = f"device/{serial}/request"

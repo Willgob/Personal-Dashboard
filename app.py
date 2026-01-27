@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, jsonify
+from flask import Flask, render_template, request, url_for, jsonify, Response
 import yaml
 import psutil
 import requests
@@ -12,8 +12,10 @@ from threading import Thread
 from dotenv import load_dotenv
 import os
 import random
+import base64
 
 import bambu_lab_mqtt
+from bambu_camera import BambuCamera
 
 mqtt_client = bambu_lab_mqtt.start_mqtt()
 
@@ -329,6 +331,25 @@ def status():
           return jsonify(bambu_lab_mqtt.latest_status)
      return jsonify("error")
 
+camera = BambuCamera(os.getenv("BAMBU_IP"), os.getenv("BAMBU_ACCESS_CODE"))
+camera.start()
+
+@app.route("/Bambulab/camera/live")
+def bambu_camera_Feed():
+     def generate():
+          boundary = "--frame"
+          while True:
+               if camera.frame:
+                    yield (
+                         f"{boundary}\r\n"
+                         f"Content-Type: image/jpeg\r\n"
+                         f"Content-Length : {len(camera.frame)}\r\n\r\n"
+                    ).encode() + camera.frame + b"\r\n"
+               time.sleep(0.05)
+     return Response(
+          generate(),
+          mimetype="multipart/x-mixed-replace; boundary=frame"
+     )
 
 @app.route("/Bambulab/pause", methods = ["POST", "GET"])
 def print_pause():
