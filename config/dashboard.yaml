@@ -161,6 +161,15 @@ widgets:
     type: quote
     title: Quote of the day
 
+  - id: bambu_lab-main
+    x: 7
+    y: 5
+    width: 3
+    height: 3
+    type: bambu_lab
+    title: Bambu Lab P1S
+
+
 theme: 1
 
 themes: 

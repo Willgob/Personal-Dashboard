@@ -300,15 +300,6 @@ def mail():
      return data
 
 
-
-@app.route("/Bambulab/status", methods=["GET", "POST"])
-def status():
-     if bambu_lab_mqtt.latest_status:
-          return jsonify(bambu_lab_mqtt.latest_status)
-     return jsonify("error")
-
-
-
 def quote_of_the_day():
      config = load_dashboard_config()
      Quotes = config.get("quotes", [])
@@ -332,12 +323,17 @@ def theme_css():
      return render_template("theme.css.j2", theme=theme), 200, {"Content-Type" : "text/css"}
 
 
+@app.route("/Bambulab/status", methods=["GET", "POST"])
+def status():
+     if bambu_lab_mqtt.latest_status:
+          return jsonify(bambu_lab_mqtt.latest_status)
+     return jsonify("error")
+
 
 @app.route("/Bambulab/pause", methods = ["POST", "GET"])
 def print_pause():
      payload = {
           "system" : {
-               "sequence_id" : "1",
                "command" : "pause"
           }
      }
@@ -348,7 +344,6 @@ def print_pause():
 def print_resume():
      payload = {
           "system" : {
-               "sequence_id" : "2",
                "command" : "resume"
           }
      }
@@ -359,7 +354,6 @@ def print_resume():
 def print_stop():
      payload = {
           "system" : {
-               "sequence_id" : 3,
                "command" : "stop"
           }
      }
@@ -370,7 +364,6 @@ def print_stop():
 def light_on():
      payload = {
           "system": {
-               "sequence_id" : "4",
                "command" : "ledctrl",
                "led_node" : "chamber_light",
                "led_mode" : "on"
@@ -384,7 +377,6 @@ def light_on():
 def light_off():
      payload = {
           "system" : {
-               "sequence_id" : "5",
                "command" : "ledctrl",
                "led_node" : "chamber_light",
                "led_mode" :"off"
@@ -392,6 +384,7 @@ def light_off():
      }
      bambu_lab_mqtt.send_command(mqtt_client,bambu_lab_mqtt.printer_serial, payload)
      return jsonify({"ok": True})
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5050)

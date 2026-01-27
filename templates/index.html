@@ -320,6 +320,23 @@
             </div>
             {% endif %}
 
+            {% if widget.type == "bambu_lab" %}
+            <div class="widget bambu_lab-widget"
+            data-x = "{{ widget.x }}"
+            data-y = "{{ widget.y }}"
+            data-width = "{{ widget.width }}"
+            data-height = "{{ widget.height }}"
+            data-widget-id = "{{ widget.id }}"> 
+
+                <div class="widget-header"> {{ widget.title }}</div>
+                <div id = "widget-content">
+                    <div id="widget-bambu_lab-content"></div>
+                    <button onclick="bambu_light_on()">Light On</button>
+                    <button onclick="bambu_light_off()">Light Off</button>
+                    <button onclick = "bambu_light_toggle()">Light Toggle</button>
+                </div>
+            </div>
+            {% endif %}
 
             {% endfor %}
         </div>

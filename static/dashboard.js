@@ -618,6 +618,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
+        async function bambulab() {
+            const res = await fetch("/Bambulab/status")
+            const data = await res.json()
+
+            bambulab_widget = document.getElementById("widget-bambu_lab-content")
+            bambulab_widget.innerHTML = "Loading...";
+
+            let led_status = data.print.lights_report["0"].mode;
+
+
+            bambulab_widget.innerHTML = `${led_status}`;
+            
+        }
+
+        window.bambu_light_on = async function() {
+            await fetch("/Bambulab/light/on", {method: "POST"})
+            bambulab()
+        }
+
+        window.bambu_light_off = async function() {
+            await fetch("/Bambulab/light/off", {method: "POST"})
+            bambulab()
+        }
+
+        window.bambu_light_toggle = async function() {
+            const res = await fetch("/Bambulab/status")
+            const data = await res.json()
+            const mode = data.print.lights_report["0"].mode
+
+            if (mode === "on") {
+                await fetch("/Bambulab/light/off", {method: "POST"})
+            } else {
+                await fetch("/Bambulab/light/on", {method: "POST"})
+            }
+            bambulab()
+        }
+
+
     loadTodos();
     attachToggle();
     addTodo();
@@ -634,10 +672,12 @@ document.addEventListener('DOMContentLoaded', () => {
     clipboard();
     mail();
     quote();
+    bambulab();
 
     // Lyrics(data.artist, data.title);
     setInterval(clipboard, 5000);
-    setInterval(Audio_function, 2000);
+    setInterval(Audio_function, 1000);
+    setInterval(bambulab, 3000)
 
 
 });
