@@ -632,7 +632,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
         }
         
-        sd
 
         window.bambu_light_on = async function() {
             await fetch("/Bambulab/light/on", {method: "POST"})
