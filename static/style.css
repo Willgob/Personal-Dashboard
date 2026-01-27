@@ -27,12 +27,12 @@ h1 {
     background-color: var(--widget_background);
     border-radius: 12px;
     padding: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 20px var(--widget_border);
 }
 
 .widget:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 12px 25px var(--widget_border_hover);
 }
 
 .widget-header {

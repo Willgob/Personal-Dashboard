@@ -318,12 +318,16 @@ def quote():
 
 def load_theme():
      config = load_dashboard_config()
-     return config.get("theme", {})
+     print("config:", config)
+     selected_config = config.get("theme", 1)
+     themes = config.get("themes", {})
+     return themes.get(selected_config, {})
 
 @app.route("/theme.css")
 def theme_css():
      theme = load_theme()
      return render_template("theme.css.j2", theme=theme), 200, {"Content-Type" : "text/css"}
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5050)
