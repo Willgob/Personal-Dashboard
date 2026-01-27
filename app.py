@@ -13,6 +13,12 @@ from dotenv import load_dotenv
 import os
 import random
 
+import bambu_lab_mqtt
+
+mqtt_client = bambu_lab_mqtt.start_mqtt()
+
+bambu_lab_mqtt.request_full_data(mqtt_client, bambu_lab_mqtt.printer_serial)
+
 app = Flask(__name__)
 
 clipboard_history = []
@@ -293,17 +299,14 @@ def mail():
      print(r.text)  
      return data
 
-Printer_IP = os.getenv("BAMBU_IP")
-ACCESS_CODE = os.getenv("BAMBU_ACCESS_CODE")
-SERIAL = os.getenv("BAMBU_USERNAME")
+
 
 @app.route("/Bambulab/status", methods=["GET", "POST"])
 def status():
-     client = BambuClient(Printer_IP, ACCESS_CODE, SERIAL)
-     client.connect()
+     if bambu_lab_mqtt.latest_status:
+          return jsonify(bambu_lab_mqtt.latest_status)
+     return jsonify("error")
 
-     status = client.watch.get_status()
-     return status
 
 
 def quote_of_the_day():
@@ -328,6 +331,67 @@ def theme_css():
      theme = load_theme()
      return render_template("theme.css.j2", theme=theme), 200, {"Content-Type" : "text/css"}
 
+
+
+@app.route("/Bambulab/pause", methods = ["POST", "GET"])
+def print_pause():
+     payload = {
+          "system" : {
+               "sequence_id" : "1",
+               "command" : "pause"
+          }
+     }
+     bambu_lab_mqtt.send_command(mqtt_client, bambu_lab_mqtt.printer_serial, payload)
+     return jsonify({"ok" : True})
+
+@app.route("/Bambulab/resume", methods = ["POST", "GET"])
+def print_resume():
+     payload = {
+          "system" : {
+               "sequence_id" : "2",
+               "command" : "resume"
+          }
+     }
+     bambu_lab_mqtt.send_command(mqtt_client, bambu_lab_mqtt.printer_serial, payload)
+     return jsonify({"ok": True})
+
+@app.route("/Bambulab/stop", methods = ["POST", "GET"])
+def print_stop():
+     payload = {
+          "system" : {
+               "sequence_id" : 3,
+               "command" : "stop"
+          }
+     }
+     bambu_lab_mqtt.send_command(mqtt_client, bambu_lab_mqtt.printer_serial, payload)
+     return jsonify({"ok" : True})
+
+@app.route("/Bambulab/light/on",methods=["POST", "GET"])
+def light_on():
+     payload = {
+          "system": {
+               "sequence_id" : "4",
+               "command" : "ledctrl",
+               "led_node" : "chamber_light",
+               "led_mode" : "on"
+          }
+     }
+     bambu_lab_mqtt.send_command(mqtt_client, bambu_lab_mqtt.printer_serial, payload)
+     return jsonify({"ok": True})
+
+
+@app.route("/Bambulab/light/off", methods = ["POST", "GET"])
+def light_off():
+     payload = {
+          "system" : {
+               "sequence_id" : "5",
+               "command" : "ledctrl",
+               "led_node" : "chamber_light",
+               "led_mode" :"off"
+          }
+     }
+     bambu_lab_mqtt.send_command(mqtt_client,bambu_lab_mqtt.printer_serial, payload)
+     return jsonify({"ok": True})
 
 if __name__ == '__main__':
     app.run(debug=True, port=5050)
