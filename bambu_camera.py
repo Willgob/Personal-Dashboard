@@ -35,10 +35,12 @@ class BambuCamera:
                 ctx = ssl.create_default_context()
                 ctx.check_hostname = False
                 ctx.verify_mode = ssl.CERT_NONE
-
+                print("connecting to", self.ip)
                 sock = socket.create_connection((self.ip, 6000), timeout=10)
+                print("connected")
                 tls = ctx.wrap_socket(sock,server_hostname=self.ip)
                 tls.sendall(self.create_auth())
+                print("waiting for header")
 
                 header = b""
                 while self.running:
@@ -49,8 +51,10 @@ class BambuCamera:
                         header += chunk
                     
                     payload_size = struct.unpack_from("<I", header, 0)[0]
+                    print("payload", payload_size)
                     header = b""
                     if payload_size <= 0 or payload_size > 10 * 1024 *1024:
+                        ("invalid payload size")
                         continue
 
                     img = b""
@@ -59,8 +63,9 @@ class BambuCamera:
                         if not chunk:
                             raise ConnectionError("Camer disconnected")
                         img += chunk
-                    
-                    if img.startswith(b"/xFF/xD8") and img.endswith(b"/xFF/xD9"):
+
+                    print("got image byes:", len(img), "first byes -", img[:4])
+                    if img.startswith(b"\xFF\xD8") and img.endswith(b"\xFF\xD9"):
                         self.frame = img
 
             except Exception as e:

@@ -337,14 +337,16 @@ camera.start()
 @app.route("/Bambulab/camera/live")
 def bambu_camera_Feed():
      def generate():
-          boundary = "--frame"
           while True:
                if camera.frame:
-                    yield (
-                         f"{boundary}\r\n"
-                         f"Content-Type: image/jpeg\r\n"
-                         f"Content-Length : {len(camera.frame)}\r\n\r\n"
-                    ).encode() + camera.frame + b"\r\n"
+                    chunk =  (
+                         b"--frame\r\n"
+                         b"Content-Type: image/jpeg\r\n"
+                         b"Content-Length: " + str(len(camera.frame)).encode() + b"\r\n"
+                         b"\r\n" 
+                    ) + camera.frame + b"\r\n"
+
+                    yield chunk
                time.sleep(0.05)
      return Response(
           generate(),
@@ -408,5 +410,5 @@ def light_off():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5050)
+    app.run(debug=False, port=5050)
 
