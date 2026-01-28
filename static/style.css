@@ -382,4 +382,6 @@ margin-bottom: 5px;
     margin-left: 5px;
     width: 1220px;
     height: auto;
+    border-radius: 25px;
+    border-color: 10px solid rgb(244, 131, 131);
 }

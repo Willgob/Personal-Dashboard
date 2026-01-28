@@ -332,6 +332,18 @@ def bambulab_page():
 def bambulab_filament():
      return render_template("bambulab_filament.html")
 
+@app.route("/Bambulab/Settings")
+def bambulab_settings():
+     return render_template("bambulab_settings.html")
+
+@app.route("/Bambulab/HMS")
+def bambulab_HMS():
+     return render_template("bambulab_HMS.html")
+
+@app.route("/Bambulab/Print_Files")
+def bambulab_Print_Files():
+     return render_template("bambulab_print_files.html")
+
 @app.route("/Bambulab/status", methods=["GET", "POST"])
 def status():
      if bambu_lab_mqtt.latest_status:
