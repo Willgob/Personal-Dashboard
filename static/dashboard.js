@@ -623,12 +623,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await res.json()
 
             bambulab_widget = document.getElementById("widget-bambu_lab-content")
-            bambulab_widget.innerHTML = "Loading...";
+            bambulab_widget_led_status = document.getElementById("widget-bambu_lab-led-status")
+            bambulab_widget_nozzle_temp = document.getElementById("widget-bambu_lab-nozzle-temp")
 
             let led_status = data.print.lights_report["0"].mode;
+            let nozzle_temp = data.print.nozzle_temper;
 
+            if( led_status == "on"){
+                bambulab_widget_led_status.innerHTML = `Led: On`;
+            } else {
+                bambulab_widget_led_status.innerHTML = `Led: Off`;
+            }
 
-            bambulab_widget.innerHTML = `${led_status}`;
+            bambulab_widget_nozzle_temp.innerHTML = `Nozzle Temp: ${nozzle_temp}°C`;
+            
+            bambulab_widget.innerHTML = ``;
             
         }
         

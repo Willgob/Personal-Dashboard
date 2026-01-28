@@ -332,7 +332,7 @@ def status():
      return jsonify("error")
 
 camera = BambuCamera(os.getenv("BAMBU_IP"), os.getenv("BAMBU_ACCESS_CODE"))
-camera.start()
+# camera.start()
 
 @app.route("/Bambulab/camera/live")
 def bambu_camera_Feed():
@@ -352,6 +352,13 @@ def bambu_camera_Feed():
           generate(),
           mimetype="multipart/x-mixed-replace; boundary=frame"
      )
+
+def start_camera_ONCE():
+     if os.environ.get("WERKZEUG_RUN_MAIN") == "true" :
+          camera.start()
+          print("camera started")
+     else:
+          print("camera already started ithknl")
 
 @app.route("/Bambulab/pause", methods = ["POST", "GET"])
 def print_pause():
@@ -410,5 +417,6 @@ def light_off():
 
 
 if __name__ == '__main__':
-    app.run(debug=False, port=5050)
+    start_camera_ONCE()
+    app.run(debug=True, port=5050)
 

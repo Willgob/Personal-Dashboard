@@ -299,8 +299,13 @@ margin-bottom: 5px;
     transform: scale(1.05); 
 }
 
-/* .bambu-camera {
+.bambu-camera {
     width: 100%;
-    height: 50px;
+    height: auto;
     border-radius: 12px;
-} */
+    object-fit: cover;
+}
+
+.bambu-data {
+    margin-bottom: 252px;
+}
