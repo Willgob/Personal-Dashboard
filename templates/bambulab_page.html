@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
     <title>Dashboard</title>
 </head>
 <body>
-    aha
+    <div class="bambu-header-bar">
+        <h1 class="bambulab-dashboard-title">Bambulab P1S</h1>
+
+        <span class="bambulab-page-headers"> 
+            <a href="/Bambulab/Filament" class="icon-link icon-link-first" title="Filament Contents">
+                <img src="/static/icons/filament.png" class="header-icon">
+                <span class="icon-label">Fliament</span>
+            </a>
+            <a href="/bambulab/status" class="icon-link" title="RAW Json">
+                <img src="/static/icons/json.png" class="header-icon">
+                <span class="icon-label">RAW Json</span>
+            </a>
+        </span>
+    </div>
+
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
 </body>
 </html>

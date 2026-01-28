@@ -318,6 +318,60 @@ margin-bottom: 5px;
     border-radius: 5px;
     border: none;
     padding: 3px 6px;
-    margin-bottom: 5px;
+    margin-bottom: 5px; 
 
+}
+
+.bambulab-dashboar-title {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.bambulab-page-headers {
+    display: inline-flex;
+}
+
+.icon-link {
+    margin-top: 19px;
+    margin-left: 35px;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+    color: var(--button_text_color);
+    background-color: var(--button_background);
+    border-radius: 5px;
+    border: none;
+    padding: 3px 6px;
+    margin-bottom: 5px; 
+    transform: scale(1.25);
+}
+
+.icon-link:hover {
+    background-color: var(--button_hover);
+    transform: translateY(-2px);
+    transform: scale(1.05); 
+}
+
+.icon-link-first {
+    margin-left: 90px;
+}
+
+.header-icon {
+    width: 28px;
+    height: 28px;
+    align-items: center;
+
+}
+
+.bambu-header-bar {
+    display: flex;
+    align-items: center;
+}
+
+.icon-label {
+    text-decoration: none;
 }
