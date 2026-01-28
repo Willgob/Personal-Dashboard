@@ -622,12 +622,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const res = await fetch("/Bambulab/status")
             const data = await res.json()
 
-            bambulab_widget = document.getElementById("widget-bambu_lab-content")
             bambulab_widget_led_status = document.getElementById("widget-bambu_lab-led-status")
             bambulab_widget_nozzle_temp = document.getElementById("widget-bambu_lab-nozzle-temp")
+            bambulab_widget_print_status = document.getElementById("widget-bambu_lab-print-status")
 
             let led_status = data.print.lights_report["0"].mode;
             let nozzle_temp = data.print.nozzle_temper;
+            let print_status = data.print.print_type;
 
             if( led_status == "on"){
                 bambulab_widget_led_status.innerHTML = `Led: On`;
@@ -635,12 +636,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 bambulab_widget_led_status.innerHTML = `Led: Off`;
             }
 
-            bambulab_widget_nozzle_temp.innerHTML = `Nozzle Temp: ${nozzle_temp}°C`;
-            
-            bambulab_widget.innerHTML = ``;
+            bambulab_widget_nozzle_temp.innerHTML = `Nozzle Temp: ${Math.round(nozzle_temp)}°C`;
+            bambulab_widget_print_status.innerHTML = `Print Status: ${print_status}`
+
             
         }
         
+        window.bambu_advanced = async function() {
+            console.log("clicked");
+        }
 
         window.bambu_light_on = async function() {
             await fetch("/Bambulab/light/on", {method: "POST"})
@@ -687,7 +691,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Lyrics(data.artist, data.title);
     setInterval(clipboard, 5000);
     setInterval(Audio_function, 1000);
-    setInterval(bambulab, 3000)
+    setInterval(bambulab, 3000);
 
 
 });
