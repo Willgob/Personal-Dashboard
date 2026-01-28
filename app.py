@@ -328,6 +328,10 @@ def theme_css():
 def bambulab_page():
      return render_template("bambulab_page.html")
 
+@app.route("/Bambulab/Filament")
+def bambulab_filament():
+     return render_template("bambulab_filament.html")
+
 @app.route("/Bambulab/status", methods=["GET", "POST"])
 def status():
      if bambu_lab_mqtt.latest_status:

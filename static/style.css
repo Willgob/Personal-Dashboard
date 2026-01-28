@@ -375,3 +375,11 @@ margin-bottom: 5px;
 .icon-label {
     text-decoration: none;
 }
+
+.camera-live-dashboard {
+    display: block;
+    margin-top: 50px;
+    margin-left: 5px;
+    width: 1220px;
+    height: auto;
+}
