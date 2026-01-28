@@ -324,6 +324,9 @@ def theme_css():
      theme = load_theme()
      return render_template("theme.css.j2", theme=theme), 200, {"Content-Type" : "text/css"}
 
+@app.route("/Bambulab/Page")
+def bambulab_page():
+     return render_template("bambulab_page.html")
 
 @app.route("/Bambulab/status", methods=["GET", "POST"])
 def status():

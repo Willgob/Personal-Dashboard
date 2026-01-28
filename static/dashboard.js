@@ -644,6 +644,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         window.bambu_advanced = async function() {
             console.log("clicked");
+            window.open('/Bambulab/Page', '_blank');
         }
 
         window.bambu_light_on = async function() {
