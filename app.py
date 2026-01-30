@@ -438,8 +438,8 @@ def light_off():
 def set_nozzle_temp(temp):
      payload = {
           "print" : {
-               "command" : "set_nozzle_temp",
-               "nozzle_temp" :  temp
+               "command" : "gcode_line",
+               "param" : f"M104 S{temp}"
           }
      }
      bambu_lab_mqtt.send_command(mqtt_client,bambu_lab_mqtt.printer_serial, payload)

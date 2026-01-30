@@ -14,4 +14,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     bambulabpage();
+    setInterval(bambulabpage, 1000)
 });
