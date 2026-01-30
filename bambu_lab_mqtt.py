@@ -32,7 +32,7 @@ def on_message(client, userdata, msg):
     global latest_status, latest_snapshot
     try:
         payload = json.loads(msg.payload.decode() )
-        # print("Raw data", json.dumps(payload, indent=2))
+        print("Raw data", json.dumps(payload, indent=2))
         for key, value in payload.items():
             if key not in latest_status:
                 latest_status[key] = value
@@ -42,7 +42,7 @@ def on_message(client, userdata, msg):
                 else :
                     latest_status[key] = value
 
-        # print(json.dumps(latest_status, indent=2))
+        print(json.dumps(latest_status, indent=2))
         print("message")
     
     except: pass

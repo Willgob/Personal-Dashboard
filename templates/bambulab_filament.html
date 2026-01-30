@@ -1,349 +1,48 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/static/style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/theme.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
-        <title>Dashboard</title>
-    </head>
-    <body>
-        <h1>Personal Dashboard</h1>
-        
-        <div class="dashboard">
-            {% for widget in widgets %}
-            <!-- <div class="widget-header">{{ widget.title }}</div> -->
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="bambu-header-bar">
+        <h1 class="bambulab-dashboard-title">Bambulab P1S</h1>
 
+        <span class="bambulab-page-headers"> 
+            <a href="/Bambulab/Filament" class="icon-link icon-link-first" title="Filament Contents">
+                <img src="/static/icons/filament.png" class="header-icon">
+                <span class="icon-label">Fliament</span>
+            </a>
+            <a href="/Bambulab/status" class="icon-link" title="RAW Json">
+                <img src="/static/icons/json.png" class="header-icon">
+                <span class="icon-label">RAW Json</span>
+            </a>
+            <a href="/Bambulab/Page" class="icon-link" title="Control">
+                <img src="/static/icons/control.png" class = "header-icon">
+                <span class="icon-label">Control</span>
+            </a>
+            <a href="/Bambulab/Settings" class="icon-link" title="Settings">
+                <img src="/static/icons/settings.png" class="header-icon">
+                <span class="icon-label">Settings</span>
+            </a>
+            <a href= "/Bambulab/HMS" class="icon-link" title="HMS">
+                <img src="/static/icons/hms.png" class="header-icon">
+                <span class="icon-label">HMS</span>
+            </a>
+            <a href="/Bambulab/Print_Files" class="icon-link" title="Print Files">
+                <img src="/static/icons/file.svg" class="header-icon">
+                <span class="icon-label">Print Files</span>
+            </a>
+        </span>
 
-            {% if widget.type == "links" %}
-                <div class = "widget links_widget" data-x="{{ widget.x }}" data-y="{{ widget.y }}" data-width="{{ widget.width }}" data-height="{{ widget.height }}" data-widget-id="{{ widget.id }}">
-                    <div class="widget-header">{{ widget.title }}</div>
-                    <div class="widget-content">
-                        <ul>
-                        {% for link in widget.links %}
-                        <li>
-                        <a href="{{ link.url }}" target="_blank">{{ link.name }}</a>
-                        </li>
-                        {% endfor %}
-                        </ul>
-                    </div>
-                </div>
+    </div>
+    <img src="/Bambulab/camera/live" class="camera-live-dashboard">
 
-            {% endif %} 
-
-
-
-            {% if widget.type == "todos" %}
-                <div class="widget todo_widget" data-x="{{ widget.x }}" data-y="{{ widget.y }}" data-width="{{ widget.width }}" data-height="{{ widget.height }}" data-widget-id="{{ widget.id }}">
-                    <div class="widget-header">{{ widget.title }}</div>
-                    <div class="widget-content">
-                        <ul class="todo-list">
-                        {% for todo in widget.todos %}
-                            <li data-done="{{ 'true' if todo.done else 'false' }}">
-                                {% if todo.done %}
-                                    <s>{{ todo.task }}</s>
-                                {% else %}
-                                    {{ todo.task }}
-                                {% endif %}
-                            </li>
-                        {% endfor %}
-                        </ul>
-
-                        <div class="todo-add">
-                            <input type="text" class="todo-input" placeholder=" Add new task...">
-                            
-                        </div>
-
-                        <div class="todo-controls">
-                            <button class = "todo-input-button" role="button" >Add</button>
-                            <button class="todo-reset-button" role="button" >Reset</button>
-                        </div>
-                    </div>
-
-                </div>
-            
-            {% endif %}
-
-
-            {% if widget.type == "weather" %}
-                <div class="widget weather_widget" 
-                data-location="{{ widget.location }}" 
-                data-units="{{ widget.units }}" 
-                data-latitude="{{ widget.latitude }}" 
-                data-longitude="{{ widget.longitude }}" 
-                data-widget-id="{{ widget.id }}" 
-                data-tempunit="{{ widget.tempunit }}" 
-                data-windspeedunit="{{ widget.windspeedunit }}"
-                data-x="{{ widget.x }}"
-                data-y="{{ widget.y }}"
-                data-width="{{ widget.width }}"
-                data-height="{{ widget.height }}">
-
-                    <div class="widget-header">{{ widget.title }}</div>
-                    <div class="widget-content">
-                        <div class="weather-location">{{ widget.location }}</div>
-                        <div class="weather-temperature">Loading...</div>
-                        <div class="weather-description"></div>
-                    </div>
-
-                </div>
-            {% endif %}
-            
-
-
-            {% if widget.type == "hackatime" %}
-                <div class = "widget hackatime-widget" 
-                data-x="{{ widget.x }}" 
-                data-y="{{ widget.y }}" 
-                data-width="{{ widget.width }}" 
-                data-height="{{ widget.height }}" 
-                data-widget-id="{{ widget.id }}"
-                data-project = "{{ widget.project}}">
-                    <div class = "widget-header" > {{ widget.title }} </div>
-                    <div class = "widget-content">
-                        <div class = "hackatime-loading" > Loading... </div>
-                    </div>
-                </div>
-            {% endif %}
-
-
-            {% if widget.type == "clock" %}
-                <div class = "widget clock-widget"
-                data-x="{{ widget.x }}"
-                data-y="{{ widget.y }}" 
-                data-width="{{ widget.width }}" 
-                data-height="{{ widget.height }}"
-                data-widget-id=" {{ widget.id }}">
-
-                    <div class = "widget-header"> {{ widget.title }}</div>
-                    <div class = "widget-content">
-                        <div class="date" id="date-clock">--/--/----</div>  
-                        <div class="time" id="time-clock">--:--:--</div>
-                    </div>
-                </div>
-            {% endif %}
-
-
-            {% if widget.type == "timer" %}
-                <div class = "widget timer-widget"
-                data-x="{{ widget.x }}"
-                data-y="{{ widget.y }}"
-                data-width="{{ widget.width }}"
-                data-height="{{ widget.height }}"
-                data-widget-id="{{ widget.id }}">
-            
-                    <div class="widget-header"> {{ widget.title }}</div>
-                    <div class="widget-content">
-                        <div class="display_timer" id="display_timer"> 00.00.00</div>
-                        <hr>
-                        <div class="controls-timer">
-                        <input type="number" class="hours-timer" placeholder="Hours" min="0">
-                        <input type="number" class="minutes-timer" placeholder="Minutes" min="0" max="59">
-                        <input type="number" class="seconds-timer" placeholder="Seconds" min="0" max="59">
-                        <br>
-                        <button class="start-timer">Start</button>
-                        <button class="pause-timer">Pause</button>
-                        <button class="reset-timer">Reset</button>
-                        </div>
-
-                    </div> 
-                </div>
-            {% endif %}
-
-            {% if widget.type == "pc_stats" %}
-                <div class = "widget pc_stats-widget" 
-                data-x="{{ widget.x }}"
-                data-y="{{ widget.y }}"
-                data-width="{{widget.width }}"
-                data-height="{{ widget.height }}"
-                data-widget-id="{{ widget.id }}">
-
-                <div class="widget-header"> {{ widget.title }}</div>
-                <div class="widget-content">
-                    Loading...
-                </div>
-
-                </div>
-            {% endif %}
-
-            {% if widget.type == "pc_stats_advanced" %}
-                <div class="widget pc_stats_advanced-widget"
-                data-x="{{ widget.x }}"
-                data-y="{{ widget.y }}"
-                data-width="{{ widget.width }}"
-                data-height="{{ widget.height }}"
-                data-widget-id="{{ widget.id }}"
-                data-display="{{widget.display | join(',') }}">
-                
-                <div class="widget-header"> {{ widget.title }}</div>
-                <div class="widget-content">
-                    Loading...
-                </div>
-
-                </div>
-            {% endif %}
-                
-            {% if widget.type == "app_launcher" %}
-                <div class="widget app-launcher-widget"
-                data-x="{{ widget.x }}"
-                data-y="{{ widget.y }}"
-                data-width="{{ widget.width }}"
-                data-height="{{ widget.height }}"
-                data-widget-id="{{ widget.id }}"
-                data-display-type="{{widget.display_type}}">
-                
-                <div class="widget-header"> {{ widget.title }}</div>
-                <div class="widget-content">
-                    {% for app in widget.apps %}
-
-                        {% if app.display_type == "text" %}
-                            <button class="app-launch-button" data-cmd="{{ app.command }}"> {{ app.name }}</button>
-                        {% endif %}
-
-                        {% if app.display_type == "image" %}
-                            <button class="app-launch-button" data-cmd="{{ app.command }}">
-                                <img class="app-launch-image" src="/static/icons/{{ app.image }}" alt="{{ app.name }}">
-                            </button>
-                        {% endif %}
-
-                        {% if app.display_type == "both" %}
-                            <button class="app-launch-button" data-cmd="{{ app.command }}">
-                                <img class="app-launch-image" src="/static/icons/{{ app.image }}" alt="{{ app.name }}">
-                                <div> {{ app.name }} </div>
-                            </button>
-                        {% endif %}
-
-                    {% endfor %}
-                </div>
-
-                </div>
-            {% endif %}
-
-            {% if widget.type == "audio" %}
-                <div class="widget audio-widget"
-                data-x = "{{ widget.x }}"
-                data-y="{{ widget.y }}"
-                data-width="{{ widget.width }}"
-                data-height="{{ widget.height }}"
-                data-widget-id="{{ widget.id }}">
-
-                <div class="widget-header"> {{widget.title}} </div>
-                <!-- <img id="audio-cover" src="/static/defult_cover.png"> -->
-                <div id="audio-title" class="audio-text audio-title"> Loading... </div>
-                <div id="audio-artist" class="audio-text audio-artist"> Loading... </div>
-
-                <div class="audio-time-div">
-                    <span id="audio-time" class="audio-text audio-time"> Loading... </span>
-                    <span id="audio-status" class="audio-text audio-status"> Loading... </span>
-                    <span id="audio-current-time" class="audio-current-time"> Loading... </span>
-                </div>
-
-                <!-- <div id="audio-lyrics" class="audio-lyrics"> Loading... </div> -->
-
-                <input type="range" id="audio-bar" class="audio-bar" min="0" max="100" value="0" step="1">
-
-                <!-- <hr> -->
-                <div class="audio-button-div">
-                    <button id="audio-Previous" class= "audio-button" onclick = "audioPrevious()"> Previous </button>
-                    <button id="audio-play-pause" class= "audio-button" onclick = "audioPlayPause()"> Play/Pause </button>
-                    <button id="audio-Next" class= "audio-button" onclick = "audioNext()"> Next </button>
-                </div>
-
-                </div>
-            {% endif %}
-
-            {% if widget.type == "volume" %}
-                <div class="widget volume-widget"
-                data-x = "{{ widget.x }}"
-                data-y = "{{ widget.y}}"
-                data-width = "{{ widget.width}}"
-                data-height = " {{ widget.height }}"
-                data-widget-id = " {{ widget.id}}">
-                <div class="widget-header"> {{ widget.title }} </div>
-                <div class="widget-content">
-                    <div class="audio-button-div">
-                        <button class="audio-button volume-button volume-button-left" onclick="audioVolumeDown()"> Vol - </button>
-                        <button class="audio-button volume-button" onclick="audioVolumeUp()"> Vol + </button>
-                        <span id="audio-volume" class="audio-volume audio-text"> Loading... </span>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-
-            {% if widget.type == "clipboard" %}
-            <div class="widget clipboard-widget"
-                data-x = "{{widget.x}}"
-                data-y = "{{ widget.y }}"
-                data-width = "{{ widget.width }}"
-                data-height = "{{ widget.height }}"
-                data-widget-id = "{{ widget.id }}">
-            
-                <div class="widget-header"> {{ widget.title }} </div>
-                <div class="widget-content">
-                    <div id ="clipboard-content" class="clipboard-content"> Loading... </div>
-                </div>
-
-            </div>
-            {% endif %}
-                    
-            {% if widget.type == "mail" %}
-                <div class="widget mail-widget"
-                data-x = "{{ widget.x }}"
-                data-y = "{{ widget.y }}"
-                data-width = "{{ widget.width }}"
-                data-height = "{{ widget.height }}"
-                data-widget-id = "{{ widget.id }}">
-
-                <div class="widget-header"> {{ widget.title }}</div>
-                <div id="widget-content">
-                    <div id="widget-mail-content"> </div>
-                </div>
-            
-                </div>
-            {% endif %}
-                
-
-            {% if widget.type == "quote" %}
-                <div class="widget quote-widget"
-                data-x = "{{ widget.x }}"
-                data-y = "{{ widget.y }}"
-                data-width = "{{ widget.width}}"
-                data-height = "{{ widget.height }}"
-                data-widget-id = "{{ widget.id }}">
-            
-                <div class="widget-header"> {{ widget.title }}</div>
-                <div id="widget-content">
-                    <div id="widget-quote-content"> </div>
-                </div>
-            </div>
-            {% endif %}
-
-            {% if widget.type == "bambu_lab" %}
-            <div class="widget bambu_lab-widget"
-            data-x = "{{ widget.x }}"
-            data-y = "{{ widget.y }}"
-            data-width = "{{ widget.width }}"
-            data-height = "{{ widget.height }}"
-            data-widget-id = "{{ widget.id }}"> 
-
-                <div class="widget-header"> {{ widget.title }}</div>
-                <div id ="widget-content">
-                    <span id="widget-bambu_lab-led-status" class="widget-bambu_lab-led-status bambu-data"> Loading... </span>
-                    <span id="widget-bambu_lab-nozzle-temp" class="widget-bambu_lab-nozzle-temp bambu-data"> Loading... </span>
-                    <span id="widget-bambu_lab-print-status" class="widget-bambu_lab-print-status bambu-data"> Loading... </span>
-                    <img id="bambu-camera" class="bambu-camera" src="/Bambulab/camera/live" onclick="bambu_advanced()">
-                    <!-- <button onclick="bambu_light_on()">Light On</button>
-                    <button onclick="bambu_light_off()">Light Off</button>
-                    <button onclick = "bambu_light_toggle()">Light Toggle</button> -->
-                    
-                </div>
-            </div>
-            {% endif %}
-
-            {% endfor %}
-        </div>
-            
-    </body>
-    </html>
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
