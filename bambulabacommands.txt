@@ -1,0 +1,102 @@
+🔥 Print Control
+
+    Pause print 1
+
+    Resume print 1
+
+    Stop print 1
+
+    Start print (from file)
+
+    Send raw G‑code
+
+    Home all axes
+
+    Move axes (X/Y/Z/E)
+
+    Set speed multiplier
+
+    Set flow multiplier
+
+🌡️ Temperature Control
+
+    Set nozzle temperature
+
+    Set bed temperature
+
+    Turn off nozzle heater
+
+    Turn off bed heater
+
+💡 Lights
+
+    Turn chamber light ON 1 
+
+    Turn chamber light OFF 1
+
+    Toggle chamber light 1
+
+🧵 Filament / AMS
+
+    Load filament
+
+    Unload filament
+
+    Switch AMS slot
+
+    Read AMS RFID
+
+    Enable/disable AMS
+
+    Set AMS drying mode (if supported)
+
+🧽 Maintenance / Calibration
+
+    Home printer
+
+    Run bed leveling
+
+    Run nozzle calibration
+
+    Run flow calibration
+
+    Run vibration calibration
+
+    Purge filament
+
+    Wipe nozzle
+
+🌀 Fans
+
+    Set part‑cooling fan speed
+
+    Set chamber fan speed
+
+    Set auxiliary fan speed
+
+    Set heatbreak fan speed
+
+📦 File / Job Control
+
+    Start print from SD card
+
+    Delete file from SD card
+
+    Upload file (via FTP, not MQTT)
+
+    Query file list
+
+📡 System / Misc
+
+    Reboot printer
+
+    Get full status
+
+    Get module versions
+
+    Get AMS status
+
+    Get network info
+
+    Control camera timelapse mode
+

@@ -81,3 +81,7 @@ def start_mqtt():
     client.loop_start()
 
     return client
+
+client = start_mqtt()
+time.sleep(1)
+request_full_data(client, printer_serial)

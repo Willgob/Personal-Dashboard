@@ -434,6 +434,16 @@ def light_off():
      bambu_lab_mqtt.send_command(mqtt_client,bambu_lab_mqtt.printer_serial, payload)
      return jsonify({"ok": True})
 
+@app.route("/Bambulab/nozzle/set/<int:temp>", methods=["POST", "GET"])
+def set_nozzle_temp(temp):
+     payload = {
+          "print" : {
+               "command" : "set_nozzle_temp",
+               "nozzle_temp" :  temp
+          }
+     }
+     bambu_lab_mqtt.send_command(mqtt_client,bambu_lab_mqtt.printer_serial, payload)
+     return jsonify({"ok" : True, "nozzle temp" : temp})
 
 if __name__ == '__main__':
     start_camera_ONCE()
