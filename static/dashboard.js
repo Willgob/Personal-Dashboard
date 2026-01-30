@@ -621,6 +621,8 @@ document.addEventListener('DOMContentLoaded', () => {
         async function bambulab() {
             const res = await fetch("/Bambulab/status")
             const data = await res.json()
+            
+            console.log("loaded")
 
             bambulab_widget_led_status = document.getElementById("widget-bambu_lab-led-status")
             bambulab_widget_nozzle_temp = document.getElementById("widget-bambu_lab-nozzle-temp")
@@ -637,8 +639,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             bambulab_widget_nozzle_temp.innerHTML = `Nozzle Temp: ${Math.round(nozzle_temp)}°C`;
-            bambulab_widget_print_status.innerHTML = `Print Status: ${print_status}`
+            bambulab_widget_print_status.innerHTML = `Print Status: ${print_status}`;
 
+
+            // bambulab_main_page_data.innerHTML = `<h3 class="bambulab_main_page_data_h3">Nozzle Temp: </h3> ${Math.round(nozzle_temp)}°C`;
             
         }
         
