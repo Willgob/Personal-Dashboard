@@ -445,6 +445,18 @@ def set_nozzle_temp(temp):
      bambu_lab_mqtt.send_command(mqtt_client,bambu_lab_mqtt.printer_serial, payload)
      return jsonify({"ok" : True, "nozzle temp" : temp})
 
+@app.route("/Bambulab/bed/set/<int:temp>", methods=["POST", "GET"])
+def set_bed_temp(temp):
+     payload= {
+          "print" : {
+               "command" : "gcode_line",
+               "param" : f"M140 S{temp}"
+          }
+     }
+     bambu_lab_mqtt.send_command(mqtt_client,bambu_lab_mqtt.printer_serial, payload)
+     return jsonify({"ok" : True, "bed temp" : temp})
+
+
 if __name__ == '__main__':
     start_camera_ONCE()
     app.run(debug=True, port=5050)

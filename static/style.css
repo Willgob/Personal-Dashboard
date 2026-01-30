@@ -388,18 +388,24 @@ margin-bottom: 5px;
 }
 
 .bambulab-main-page-index {
-    display:flex;
+    display: flex;
     margin-top:50px
+}
+
+.bambulab-main-page-right {
+    display: flex;
+    flex-direction: column;
+    margin-left: 35px;
+    justify-content: flex-start;
 }
 
 .bambulab-main-page-data {
     margin-top: 10px;
-    margin-left: 35px;
+    /* margin-left: 35px; */
 }
 
-.nozzle_temp_bambulab_page
 
-.nozzle_temp_bambulab_page {
+.title_page_text {
     font-weight: bold;
     font-size: 1.2rem;
 }
