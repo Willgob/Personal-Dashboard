@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const minutes = String(time_now.getMinutes()) || 0;
             const seconds = String(time_now.getSeconds()) || 0;
 
-            time_html.textContent = hours + `:  ` + minutes + `:` + seconds
+            time_html.textContent = hours + `:` + minutes + `:` + seconds
 
             const structure = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
             date_html.textContent = time_now.toLocaleDateString(undefined, structure);
@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             updateDisplay();
         });
-        }
+    }
 
         function pc_stats() {
 
@@ -370,309 +370,309 @@ document.addEventListener('DOMContentLoaded', () => {
                 update_stats();
                 setInterval(update_stats, 1000);
             });
-        }
+    }
 
-        function pc_stats_advanced() {
-            document.querySelectorAll(".pc_stats_advanced-widget").forEach(widget =>{
+    function pc_stats_advanced() {
+        document.querySelectorAll(".pc_stats_advanced-widget").forEach(widget =>{
 
-                const widget_content = widget.querySelector(".widget-content");
-                const display_list = widget.dataset.display ? widget.dataset.display.split(',') : ['cpu-usage', 'disk-usage', 'ram-usage'];
+            const widget_content = widget.querySelector(".widget-content");
+            const display_list = widget.dataset.display ? widget.dataset.display.split(',') : ['cpu-usage', 'disk-usage', 'ram-usage'];
 
-                function update_stats() {
-                    fetch("/pcstats")
-                    .then(res => res.json())
-                    .then(data =>{
-                        let html_info = '';
+            function update_stats() {
+                fetch("/pcstats")
+                .then(res => res.json())
+                .then(data =>{
+                    let html_info = '';
 
-                        const cpu_percent = data.cpu_percent;
-                        const disk_usage = data.disk_percent;
-                        const ram_percent = data.ram_percent;
+                    const cpu_percent = data.cpu_percent;
+                    const disk_usage = data.disk_percent;
+                    const ram_percent = data.ram_percent;
 
-                        if(display_list.includes('cpu-usage')) {
-                            html_info += `<span class="stats_text">CPU Usage</span> - ${cpu_percent}%<br>`
-                        }
+                    if(display_list.includes('cpu-usage')) {
+                        html_info += `<span class="stats_text">CPU Usage</span> - ${cpu_percent}%<br>`
+                    }
 
-                        if(display_list.includes('disk-usage')) {
-                            html_info += `<span class="stats_text">Disk Usage</span> - ${disk_usage}%<br>`
-                        }
-                        
-                        if(display_list.includes('ram-usage')) {
-                            html_info += `<span class="stats_text">RAM Usage</span> - ${ram_percent}%`
-                        }
-
-
-                        widget_content.innerHTML = html_info;
-
-                    });
-                }
-
-                update_stats();
-                setInterval(update_stats, 1000);
-            });
-        }
+                    if(display_list.includes('disk-usage')) {
+                        html_info += `<span class="stats_text">Disk Usage</span> - ${disk_usage}%<br>`
+                    }
+                    
+                    if(display_list.includes('ram-usage')) {
+                        html_info += `<span class="stats_text">RAM Usage</span> - ${ram_percent}%`
+                    }
 
 
-        function app_launcher() {
-            document.querySelectorAll(".app-launch-button").forEach(button =>{
-                button.onclick = () => {
-                    fetch("/apprun", {
-                        method: "POST",
-                        headers: {"Content-Type": "application/json"},
-                        body: JSON.stringify({cmd : button.dataset.cmd})
-                    });
-                }
-            });
-        }
+                    widget_content.innerHTML = html_info;
 
-        
-        async function Hackatime() {
-            const res = await fetch("/hackatime/today");
-            const data = await res.json();
-
-            const res2 = await fetch("/hackatime/data");
-            const data2 = await res2.json();
-
-            time_today = data["Time Today"];
-            username = data2.data.username;
-            total_time = data2.data.human_readable_total;
-            trust = data2.trust_factor.trust_level;
-
-            document.querySelector(".hackatime-loading").innerHTML = `
-            <span class="hackatime-time-today">Today - ${time_today}</span>
-            <hr>
-            <span class="hackatime-username">Username - ${username}</span>
-            <br>
-            <span class="hackatime-project">Total Time - ${total_time} </span>
-            <br>
-            <span class="hackatime-trust">Trust Level - ${trust}</span>
-            `;
-
-        }
-
-
-
-        const audio_bar = document.getElementById("audio-bar");
-        let isDragging = false;
-
-
-        window.audioPlayPause = async function () {
-            await fetch("/audio/play_pause", {method: "POST"});
-        }
-
-        window.audioNext = async function () {
-            await fetch("/audio/next", {method: "POST"});
-            audio_bar.value = 0;
-        }
-
-        window.audioPrevious =async function  () {
-            await fetch("/audio/previous", {method: "POST"});
-            audio_bar.value = 0;
-        }
-        
-        window.audioVolumeUp = async function() {
-            await fetch("/audio/volume_up", {method: "POST"});
-        }
-
-        window.audioVolumeDown = async function () {
-            await fetch("/audio/volume_down", {method: "POST"});
-        }
-        
-        audio_bar.addEventListener("input", (e) => {
-            isDragging = true;
-            document.getElementById("audio-current-time").textContent = formatTime(parseInt(e.target.value));
-        });
-
-        audio_bar.addEventListener("change", async (e)=> {
-            const new_time = e.target.value;
-            await fetch("/audio/seek", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({position: parseInt(new_time)})
-            });
-            isDragging = false;
-        });
-
-
-
-        async function Audio_function() {
-            const res = await fetch("audio/current");
-            const data = await res.json();
-            // const audio_bar = document.getElementById("audio-bar");
-
-            const res2 = await fetch("audio/volume");
-            const data2 = await res2.json();
-
-            console.log(data);
-
-            artist = data.artist;
-            title = data.title;
-            status_audio = data.status;
-            cover = data.cover;
-            audio_time_int = data.length;
-            audio_current_time_int = data.position;
-            audio_time = formatTime(audio_time_int);
-            audio_current_time = formatTime(audio_current_time_int);
-            volume = data2.volume;
-
-            document.getElementById("audio-artist").textContent = artist;
-            document.getElementById("audio-title").textContent = title;
-            // document.getElementById("audio-cover").src = /static/default_cover.png;
-            document.getElementById("audio-status").textContent = status_audio;
-            document.getElementById("audio-time").textContent = audio_time;
-            document.getElementById("audio-current-time").textContent = audio_current_time;
-            document.getElementById("audio-volume").textContent = `Volume - ${volume}%`;
-
-
-            if(!isDragging) {
-                audio_bar.max = data.length;
-                audio_bar.value = data.position;
-
-            }
-        }
-
-        async function Lyrics(artist, title) {
-            const res = await fetch(`/audio/lyrics/${encodeURIComponent(artist)}/${encodeURIComponent(title)}`);
-            const data = await res.json();
-            if(data.lyrics) {
-                display_lyrics(data.lyrics);
-            } else {
-                console.error("No lyrics found");
-            }
-        }
-
-        function display_lyrics(lines) {
-            const audio_lyrics = document.getElementById("audio-lyrics");
-            audio_lyrics.innerHTML = '';
-            lines.forEach(line => {
-                const p = document.createElement('p');
-                p.textContent = line;
-                audio_lyrics.appendChild(p);
-            });
-        }
-
-        let lastClipboard = [];
-
-        async function clipboard() {
-            const res = await fetch("/clipboard/history");
-            const data = await res.json();
-            console.log(data);
-
-            if (JSON.stringify(data.history) === JSON.stringify(lastClipboard)) {
-                return;
-            }
-
-            lastClipboard = data.history;
-
-            const clipboard_content = document.getElementById("clipboard-content");
-            if (!clipboard_content) return;
-
-
-            clipboard_content.replaceChildren();
-
-            data.history.forEach(item => {
-                const div = document.createElement('div');
-                div.className="clipboard-item";
-                div.textContent = item;
-
-                div.onclick=() => {
-                    navigator.clipboard.writeText(item);
-                };
-                clipboard_content.appendChild(div);
-            });
-        }
-
-        async function mail() {
-            const res = await fetch("/mail/mail")
-            const data = await res.json();
-
-            mail_widget = document.getElementById("widget-mail-content");
-            mail_item = document.getElementById("mail-item")
-
-            const reverse_letters = [...data.letters].reverse();
-
-            reverse_letters.slice(0, 5).forEach(letter => {
-                const div = document.createElement("div");
-                div.className = "mail-item";
-                div.id = "mail-item"
-                
-                div.innerHTML = `${letter.title}`
-                let mail = letter.title;
-                // mail_widget.innerHTML = JSON.stringify(mail).replace(/^["']|["']$/g, "");
-                mail_widget.appendChild(div);
-
-                div.addEventListener('click', function(){
-                    alert(
-                        `Title - ${letter.title} \nStatus - ${letter.status}\nCreated - ${letter.created_at}\nType - ${letter.type}\nTags - ${letter.tags}`);
                 });
+            }
+
+            update_stats();
+            setInterval(update_stats, 1000);
+        });
+    }
+
+
+    function app_launcher() {
+        document.querySelectorAll(".app-launch-button").forEach(button =>{
+            button.onclick = () => {
+                fetch("/apprun", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({cmd : button.dataset.cmd})
+                });
+            }
+        });
+    }
+
+    
+    async function Hackatime() {
+        const res = await fetch("/hackatime/today");
+        const data = await res.json();
+
+        const res2 = await fetch("/hackatime/data");
+        const data2 = await res2.json();
+
+        time_today = data["Time Today"];
+        username = data2.data.username;
+        total_time = data2.data.human_readable_total;
+        trust = data2.trust_factor.trust_level;
+
+        document.querySelector(".hackatime-loading").innerHTML = `
+        <span class="hackatime-time-today">Today - ${time_today}</span>
+        <hr>
+        <span class="hackatime-username">Username - ${username}</span>
+        <br>
+        <span class="hackatime-project">Total Time - ${total_time} </span>
+        <br>
+        <span class="hackatime-trust">Trust Level - ${trust}</span>
+        `;
+
+    }
+
+
+
+    const audio_bar = document.getElementById("audio-bar");
+    let isDragging = false;
+
+
+    window.audioPlayPause = async function () {
+        await fetch("/audio/play_pause", {method: "POST"});
+    }
+
+    window.audioNext = async function () {
+        await fetch("/audio/next", {method: "POST"});
+        audio_bar.value = 0;
+    }
+
+    window.audioPrevious =async function  () {
+        await fetch("/audio/previous", {method: "POST"});
+        audio_bar.value = 0;
+    }
+    
+    window.audioVolumeUp = async function() {
+        await fetch("/audio/volume_up", {method: "POST"});
+    }
+
+    window.audioVolumeDown = async function () {
+        await fetch("/audio/volume_down", {method: "POST"});
+    }
+    
+    audio_bar.addEventListener("input", (e) => {
+        isDragging = true;
+        document.getElementById("audio-current-time").textContent = formatTime(parseInt(e.target.value));
+    });
+
+    audio_bar.addEventListener("change", async (e)=> {
+        const new_time = e.target.value;
+        await fetch("/audio/seek", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({position: parseInt(new_time)})
+        });
+        isDragging = false;
+    });
+
+
+
+    async function Audio_function() {
+        const res = await fetch("audio/current");
+        const data = await res.json();
+        // const audio_bar = document.getElementById("audio-bar");
+
+        const res2 = await fetch("audio/volume");
+        const data2 = await res2.json();
+
+        console.log(data);
+
+        artist = data.artist;
+        title = data.title;
+        status_audio = data.status;
+        cover = data.cover;
+        audio_time_int = data.length;
+        audio_current_time_int = data.position;
+        audio_time = formatTime(audio_time_int);
+        audio_current_time = formatTime(audio_current_time_int);
+        volume = data2.volume;
+
+        document.getElementById("audio-artist").textContent = artist;
+        document.getElementById("audio-title").textContent = title;
+        // document.getElementById("audio-cover").src = /static/default_cover.png;
+        document.getElementById("audio-status").textContent = status_audio;
+        document.getElementById("audio-time").textContent = audio_time;
+        document.getElementById("audio-current-time").textContent = audio_current_time;
+        document.getElementById("audio-volume").textContent = `Volume - ${volume}%`;
+
+
+        if(!isDragging) {
+            audio_bar.max = data.length;
+            audio_bar.value = data.position;
+
+        }
+    }
+
+    async function Lyrics(artist, title) {
+        const res = await fetch(`/audio/lyrics/${encodeURIComponent(artist)}/${encodeURIComponent(title)}`);
+        const data = await res.json();
+        if(data.lyrics) {
+            display_lyrics(data.lyrics);
+        } else {
+            console.error("No lyrics found");
+        }
+    }
+
+    function display_lyrics(lines) {
+        const audio_lyrics = document.getElementById("audio-lyrics");
+        audio_lyrics.innerHTML = '';
+        lines.forEach(line => {
+            const p = document.createElement('p');
+            p.textContent = line;
+            audio_lyrics.appendChild(p);
+        });
+    }
+
+    let lastClipboard = [];
+
+    async function clipboard() {
+        const res = await fetch("/clipboard/history");
+        const data = await res.json();
+        console.log(data);
+
+        if (JSON.stringify(data.history) === JSON.stringify(lastClipboard)) {
+            return;
+        }
+
+        lastClipboard = data.history;
+
+        const clipboard_content = document.getElementById("clipboard-content");
+        if (!clipboard_content) return;
+
+
+        clipboard_content.replaceChildren();
+
+        data.history.forEach(item => {
+            const div = document.createElement('div');
+            div.className="clipboard-item";
+            div.textContent = item;
+
+            div.onclick=() => {
+                navigator.clipboard.writeText(item);
+            };
+            clipboard_content.appendChild(div);
+        });
+    }
+
+    async function mail() {
+        const res = await fetch("/mail/mail")
+        const data = await res.json();
+
+        mail_widget = document.getElementById("widget-mail-content");
+        mail_item = document.getElementById("mail-item")
+
+        const reverse_letters = [...data.letters].reverse();
+
+        reverse_letters.slice(0, 5).forEach(letter => {
+            const div = document.createElement("div");
+            div.className = "mail-item";
+            div.id = "mail-item"
+            
+            div.innerHTML = `${letter.title}`
+            let mail = letter.title;
+            // mail_widget.innerHTML = JSON.stringify(mail).replace(/^["']|["']$/g, "");
+            mail_widget.appendChild(div);
+
+            div.addEventListener('click', function(){
+                alert(
+                    `Title - ${letter.title} \nStatus - ${letter.status}\nCreated - ${letter.created_at}\nType - ${letter.type}\nTags - ${letter.tags}`);
             });
-            
-        }
-
-        async function quote() {
-            const res = await fetch("/quote/daily")
-            const data = await res.json();
-
-            quote_widget = document.getElementById("widget-quote-content")
-
-            quote_widget.innerHTML = `${data}`;
-
-        }
-
-        async function bambulab() {
-            const res = await fetch("/Bambulab/status")
-            const data = await res.json()
-            
-            console.log("loaded")
-
-            bambulab_widget_led_status = document.getElementById("widget-bambu_lab-led-status")
-            bambulab_widget_nozzle_temp = document.getElementById("widget-bambu_lab-nozzle-temp")
-            bambulab_widget_print_status = document.getElementById("widget-bambu_lab-print-status")
-
-            let led_status = data.print.lights_report["0"].mode;
-            let nozzle_temp = data.print.nozzle_temper;
-            let print_status = data.print.print_type;
-
-            if( led_status == "on"){
-                bambulab_widget_led_status.innerHTML = `Led: On`;
-            } else {
-                bambulab_widget_led_status.innerHTML = `Led: Off`;
-            }
-
-            bambulab_widget_nozzle_temp.innerHTML = `Nozzle Temp: ${Math.round(nozzle_temp)}°C`;
-            bambulab_widget_print_status.innerHTML = `Print Status: ${print_status}`;
-
-
-            // bambulab_main_page_data.innerHTML = `<h3 class="bambulab_main_page_data_h3">Nozzle Temp: </h3> ${Math.round(nozzle_temp)}°C`;
-            
-        }
+        });
         
-        window.bambu_advanced = async function() {
-            console.log("clicked");
-            window.open('/Bambulab/Page', '_blank');
+    }
+
+    async function quote() {
+        const res = await fetch("/quote/daily")
+        const data = await res.json();
+
+        quote_widget = document.getElementById("widget-quote-content")
+
+        quote_widget.innerHTML = `${data}`;
+
+    }
+
+    async function bambulab() {
+        const res = await fetch("/Bambulab/status")
+        const data = await res.json()
+        
+        console.log("loaded")
+
+        bambulab_widget_led_status = document.getElementById("widget-bambu_lab-led-status")
+        bambulab_widget_nozzle_temp = document.getElementById("widget-bambu_lab-nozzle-temp")
+        bambulab_widget_print_status = document.getElementById("widget-bambu_lab-print-status")
+
+        let led_status = data.print.lights_report["0"].mode;
+        let nozzle_temp = data.print.nozzle_temper;
+        let print_status = data.print.print_type;
+
+        if( led_status == "on"){
+            bambulab_widget_led_status.innerHTML = `Led: On`;
+        } else {
+            bambulab_widget_led_status.innerHTML = `Led: Off`;
         }
 
-        window.bambu_light_on = async function() {
-            await fetch("/Bambulab/light/on", {method: "POST"})
-            bambulab()
-        }
+        bambulab_widget_nozzle_temp.innerHTML = `Nozzle Temp: ${Math.round(nozzle_temp)}°C`;
+        bambulab_widget_print_status.innerHTML = `Print Status: ${print_status}`;
 
-        window.bambu_light_off = async function() {
+
+        // bambulab_main_page_data.innerHTML = `<h3 class="bambulab_main_page_data_h3">Nozzle Temp: </h3> ${Math.round(nozzle_temp)}°C`;
+        
+    }
+    
+    window.bambu_advanced = async function() {
+        console.log("clicked");
+        window.open('/Bambulab/Page', '_blank');
+    }
+
+    window.bambu_light_on = async function() {
+        await fetch("/Bambulab/light/on", {method: "POST"})
+        bambulab()
+    }
+
+    window.bambu_light_off = async function() {
+        await fetch("/Bambulab/light/off", {method: "POST"})
+        bambulab()
+    }
+
+    window.bambu_light_toggle = async function() {
+        const res = await fetch("/Bambulab/status")
+        const data = await res.json()
+        const mode = data.print.lights_report["0"].mode
+
+        if (mode === "on") {
             await fetch("/Bambulab/light/off", {method: "POST"})
-            bambulab()
+        } else {
+            await fetch("/Bambulab/light/on", {method: "POST"})
         }
-
-        window.bambu_light_toggle = async function() {
-            const res = await fetch("/Bambulab/status")
-            const data = await res.json()
-            const mode = data.print.lights_report["0"].mode
-
-            if (mode === "on") {
-                await fetch("/Bambulab/light/off", {method: "POST"})
-            } else {
-                await fetch("/Bambulab/light/on", {method: "POST"})
-            }
-            bambulab()
-        }
+        bambulab()
+    }
 
 
     loadTodos();

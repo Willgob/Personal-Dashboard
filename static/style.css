@@ -440,3 +440,33 @@ margin-bottom: 5px;
 .filament-label {
     font-weight: bold;
 }
+
+.filament-modal {
+    background-color: var(--widget_background);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 8px 20px var(--widget_border);
+    color: var(--text_color);    
+    border: 0px;
+    margin-top: 52px;
+    margin-bottom: auto;
+}
+
+.filament-modal::backdrop {
+    backdrop-filter: blur(2px);
+}
+
+.filament-modal-exit {
+    margin-top: 5px;
+    color: var(--button_text_color);
+    background-color: var(--button_background);
+    border-radius: 5px;
+    border: none;
+    padding: 3px 6px;
+}
+
+.filament-modal-exit:hover {
+    background-color: var(--button_hover);
+    transform: translateY(-2px);
+    transform: scale(1.05);
+}
