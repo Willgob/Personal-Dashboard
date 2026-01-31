@@ -41,8 +41,16 @@
         </span>
 
     </div>
-    <img src="/Bambulab/camera/live" class="camera-live-dashboard">
 
-    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+    <div class="filament-container">
+        <div class="filament-card">
+            <div class="filament-text">
+                <div class="filament-label">Ext Spool</div>
+                <div class="filament-type">Pla</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='bambulab_filament.js') }}"></script>
 </body>
 </html>

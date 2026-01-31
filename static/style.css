@@ -409,3 +409,30 @@ margin-bottom: 5px;
     font-weight: bold;
     font-size: 1.2rem;
 }
+
+
+.filament-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.filament-card {
+    width: 120px;
+    height: 167px;
+    border-radius: 12px;
+    background-color: #f58989;
+    box-shadow: 0 8px 20px var(--widget_border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.filament-text {
+    margin-top: auto;
+    margin-bottom: 12px;
+    text-align: center;
+}
