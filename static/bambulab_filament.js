@@ -29,17 +29,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await res.json()
         console.log("loaded");
 
-        filament_card = document.getElementById("filament-card");
-        filament_color = getFilamentHex(data.print.ams.ams[0].tray[0].cols[0])
-        filament_card.style.backgroundColor = filament_color;
+        for(let i = 0; i<4; i++) {
+            const color = data.print.ams.ams[0].tray[i].cols[0];
+            const card = document.getElementById(`filament-card-${i+1}`);
+            const text = document.getElementById(`filament-text-${i+1}`);
+            const type = document.getElementById(`filament-type-${i+1}`);
 
-        filament_text = document.getElementById("filament-text");
-        filament_text_color = getTextColor(filament_color);
-        filament_text.style.color = filament_text_color;
+            const filament_color = getFilamentHex(color);
+            const text_color = getTextColor(filament_color);
+            const filament_type = data.print.ams.ams[0].tray[i].tray_type
 
-        filament_type = document.getElementById("filament-type")
-        filament_type_data = data.print.ams.ams[0].tray[0].tray_type
-        filament_type.innerHTML = filament_type_data;
+            card.style.backgroundColor = filament_color;
+            text.style.color = text_color
+            type.innerHTML = filament_type;
+        }
+
     }
 
 
