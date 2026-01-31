@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function flilament_color() {
         const res = await fetch("/Bambulab/status")
         const data = await res.json()
-        console.log("loaded");
+        // console.log("loaded");
 
         for(let i = 0; i<4; i++) {
             const color = data.print.ams.ams[0].tray[i].cols[0];
@@ -49,10 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.filament_data = async function(tray_number) {
         const res= await fetch("/Bambulab/status")
         const data = await res.json()
-        console.log("loaded");
+        console.log("pressed");
+        console.log("tray_number:", tray_number);
 
-        const tray_data = data.print.ams.ams[0].tray[tray_number]
-
+        const tray_data = data.print.ams.ams[0].tray[tray_number];
+    
         alert(`Tray - ${tray_number + 1} \n Type - ${tray_data.tray_type} / ${tray_data.tray_sub_brands}\n Remaining - ${tray_data.remain}% \n Nozzle Temp Min - ${tray_data.nozzle_temp_min}°C \n Nozzle Temp Max - ${tray_data.nozzle_temp_max}°C`)
     }
 
