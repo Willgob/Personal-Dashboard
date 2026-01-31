@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getTextColor(backgroundHex) {
-        const rgb = HexToRGB(backgroundHex)
+        const rgb = hexToRGB(backgroundHex)
         const brightness = GetBrightness(rgb);
         return brightness > 128 ? "#000" :"#fff";
     }
@@ -33,6 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
         filament_color = getFilamentHex(data.print.ams.ams[0].tray[0].cols[0])
         filament_card.style.backgroundColor = filament_color;
 
+        filament_text = document.getElementById("filament-text");
+        filament_text_color = getTextColor(filament_color);
+        filament_text.style.color = filament_text_color;
+
+        filament_type = document.getElementById("filament-type")
+        filament_type_data = data.print.ams.ams[0].tray[0].tray_type
+        filament_type.innerHTML = filament_type_data;
     }
 
 

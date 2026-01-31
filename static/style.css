@@ -423,7 +423,7 @@ margin-bottom: 5px;
     width: 120px;
     height: 167px;
     border-radius: 12px;
-    background-color: #f58989;
+    background-color: #050404;
     box-shadow: 0 8px 20px var(--widget_border);
     display: flex;
     flex-direction: column;
@@ -435,4 +435,8 @@ margin-bottom: 5px;
     margin-top: auto;
     margin-bottom: 12px;
     text-align: center;
+}
+
+.filament-label {
+    font-weight: bold;
 }
