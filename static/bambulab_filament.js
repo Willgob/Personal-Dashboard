@@ -45,15 +45,16 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("tray_number:", tray_number);
         const tray_data = data.print.ams.ams[0].tray[tray_number];
         console.log(tray_data);
+        
         const modal_text = document.getElementById("filament-modal-text");
         if (!modal_text)
             return;
         modal_text.innerHTML = `
-        Tray - ${tray_number + 1} <br>
-        Type - ${tray_data.tray_type} / ${tray_data.tray_sub_brands} <br>
-        Remaining - ${tray_data.remain}% <br>
-        Nozzle Temp Min - ${tray_data.nozzle_temp_min}°C <br>
-        Nozzle Temp Max - ${tray_data.nozzle_temp_max}°C`;
+        <span class="mail-popup-bold"> Tray - </span> ${tray_number + 1} <br>
+        <span class="mail-popup-bold"> Type - </span> ${tray_data.tray_type} / ${tray_data.tray_sub_brands} <br>
+        <span class="mail-popup-bold"> Remaining - </span> ${tray_data.remain}% <br>
+        <span class="mail-popup-bold"> Nozzle Temp Min - </span> ${tray_data.nozzle_temp_min}°C <br>
+        <span class="mail-popup-bold"> Nozzle Temp Max - </span> ${tray_data.nozzle_temp_max}°C`;
         const modal = document.getElementById("filament-modal");
         if (!modal)
             return;

@@ -470,3 +470,7 @@ margin-bottom: 5px;
     transform: translateY(-2px);
     transform: scale(1.05);
 }
+
+.mail-popup-bold {
+    font-weight: bold;
+}

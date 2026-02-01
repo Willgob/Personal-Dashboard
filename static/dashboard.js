@@ -581,13 +581,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    window.open_dialog = async function () {
+        const res = await fetch("/mail/mail")
+        const data = await res.json();
+
+        const modal_text = document.getElementById("filament-modal-text");
+        if (!modal_text)
+            return;
+        modal_text.innerHTML = `
+        Title - ${letter.title} \nStatus - ${letter.status}\nCreated - ${letter.created_at}\nType - ${letter.type}\nTags - ${letter.tags}`;
+        const modal = document.getElementById("filament-modal");
+        if (!modal)
+            return;
+        modal.showModal();
+    }
+
+    window.close_dialog = async function () {
+        const modal = document.getElementById("filament-modal");
+        if (!modal)
+            return;
+        modal.close();
+    };
+
     async function mail() {
         const res = await fetch("/mail/mail")
         const data = await res.json();
 
         mail_widget = document.getElementById("widget-mail-content");
         mail_item = document.getElementById("mail-item")
-
+ 
         const reverse_letters = [...data.letters].reverse();
 
         reverse_letters.slice(0, 5).forEach(letter => {
@@ -600,10 +622,22 @@ document.addEventListener('DOMContentLoaded', () => {
             // mail_widget.innerHTML = JSON.stringify(mail).replace(/^["']|["']$/g, "");
             mail_widget.appendChild(div);
 
-            div.addEventListener('click', function(){
-                alert(
-                    `Title - ${letter.title} \nStatus - ${letter.status}\nCreated - ${letter.created_at}\nType - ${letter.type}\nTags - ${letter.tags}`);
-            });
+        div.addEventListener('click', function(){
+            const modal_text = document.getElementById("filament-modal-text");
+            if (!modal_text)
+                return;
+            modal_text.innerHTML = `
+            <span class="mail-popup-bold">Title -</span> ${letter.title} <br>
+            <span class="mail-popup-bold">Status -</span> ${letter.status} <br> 
+            <span class="mail-popup-bold">Created -</span> ${letter.created_at} <br> 
+            <span class="mail-popup-bold">Type -</span> ${letter.type} <br>
+            <span class="mail-popup-bold">Tags -</span> ${letter.tags}`;
+
+            const modal = document.getElementById("filament-modal");
+            if (!modal)
+                return;
+            modal.showModal();
+        });
         });
         
     }
