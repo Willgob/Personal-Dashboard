@@ -346,6 +346,23 @@
             </div>
             {% endif %}
 
+
+            {% if widget.type == "timetable" %}
+            <div class="widget timetable-widget"
+            data-x = "{{ widget.x }}"
+            data-y = "{{ widget.y }}"
+            data-width = "{{ widget.width }}"
+            data-height = "{{ widget.height }}"
+            data-widget-id = "{{ widget.id }}">
+
+                <div class="widget-header"> {{ widget.title }} </div>
+                <div id="widget-content">
+                    <span id="widget-timetable-content"> Loading... </span>
+                </div>
+            </div>
+            {% endif %}
+
+
             {% endfor %}
         </div>
             

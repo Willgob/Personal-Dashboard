@@ -169,6 +169,15 @@ widgets:
     type: bambu_lab
     title: Bambu Lab P1S
 
+  - id: timetable-main
+    x: 10
+    y: 2
+    width: 2
+    height: 3
+    status: auto
+    type: timetable
+    title: Timetable
+
 
 theme: 1
 

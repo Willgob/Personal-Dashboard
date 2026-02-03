@@ -456,6 +456,132 @@ def set_bed_temp(temp):
      bambu_lab_mqtt.send_command(mqtt_client,bambu_lab_mqtt.printer_serial, payload)
      return jsonify({"ok" : True, "bed temp" : temp})
 
+@app.route("/timtable/test")
+def timetable_test():
+     login_url = "https://intranet.nbscmanlys-h.schools.nsw.edu.au/api/token"
+     email =  os.getenv("TIMETABLE_EMAIL")
+     password = os.getenv("TIMETABLE_PASSWORD")
+     print(email, password)
+
+     payload = {
+          "emailAddress" : email,
+          "password" : password
+     }
+     
+     response = requests.post(login_url, json = payload)
+     print("Login status : ", response.status_code)
+     print("Login response:",response.text)
+
+     token_data = response.json()
+     token = token_data.get("token") or token_data.get("access_token")
+
+     headers = {
+          "Authorization" : f"Bearer {token}"
+     }
+
+     api_url = f"https://intranet.nbscmanlys-h.schools.nsw.edu.au/api/user/{email}"
+
+     r = requests.get(api_url, headers=headers)
+     data = r.json()
+     print(r.status_code)
+     print(r.text)  
+     return data
+
+@app.route("/timtable/user/data")
+def timetable_user_data():
+     login_url = "https://intranet.nbscmanlys-h.schools.nsw.edu.au/api/token"
+     email =  os.getenv("TIMETABLE_EMAIL")
+     password = os.getenv("TIMETABLE_PASSWORD")
+     print(email, password)
+
+     payload = {
+          "emailAddress" : email,
+          "password" : password
+     }
+     
+     response = requests.post(login_url, json = payload)
+     print("Login status : ", response.status_code)
+     print("Login response:",response.text)
+
+     token_data = response.json()
+     token = token_data.get("token") or token_data.get("access_token")
+
+     headers = {
+          "Authorization" : f"Bearer {token}"
+     }
+
+     api_url = f"https://intranet.nbscmanlys-h.schools.nsw.edu.au/api/user/{email}"
+
+     r = requests.get(api_url, headers=headers)
+     data = r.json()
+     print(r.status_code)
+     print(r.text)  
+     return data
+
+@app.route("/timtable/timetable")
+def timetable_timetable():
+     login_url = "https://intranet.nbscmanlys-h.schools.nsw.edu.au/api/token"
+     email =  os.getenv("TIMETABLE_EMAIL")
+     password = os.getenv("TIMETABLE_PASSWORD")
+     print(email, password)
+
+     payload = {
+          "emailAddress" : email,
+          "password" : password
+     }
+     
+     response = requests.post(login_url, json = payload)
+     print("Login status : ", response.status_code)
+     print("Login response:",response.text)
+
+     token_data = response.json()
+     token = token_data.get("token") or token_data.get("access_token")
+
+     headers = {
+          "Authorization" : f"Bearer {token}"
+     }
+
+     api_url = f"https://intranet.nbscmanlys-h.schools.nsw.edu.au/api/timetable/{email}"
+
+     r = requests.get(api_url, headers=headers)
+     data = r.json()
+     print(r.status_code)
+     print(r.text)  
+     return data
+
+
+@app.route("/timtable/bell/times")
+def timetable_bell_times():
+     login_url = "https://intranet.nbscmanlys-h.schools.nsw.edu.au/api/token"
+     email =  os.getenv("TIMETABLE_EMAIL")
+     password = os.getenv("TIMETABLE_PASSWORD")
+     print(email, password)
+
+     payload = {
+          "emailAddress" : email,
+          "password" : password
+     }
+     
+     response = requests.post(login_url, json = payload)
+     print("Login status : ", response.status_code)
+     print("Login response:",response.text)
+
+     token_data = response.json()
+     token = token_data.get("token") or token_data.get("access_token")
+
+     headers = {
+          "Authorization" : f"Bearer {token}"
+     }
+
+     api_url = f"https://intranet.nbscmanlys-h.schools.nsw.edu.au/api/timetable/bell-times"
+
+     r = requests.get(api_url, headers=headers)
+     data = r.json()
+     print(r.status_code)
+     print(r.text)  
+     return data
+
+
 
 if __name__ == '__main__':
     start_camera_ONCE()
