@@ -572,6 +572,9 @@ def timetable_bell_times():
     print(r.text)
     return data
 
+@app.route("/debug")
+def debug():
+    return render_template("debug.html")
 
 if __name__ == "__main__":
     start_camera_ONCE()
