@@ -585,6 +585,5 @@ def timetable_bell_times():
 
 if __name__ == '__main__':
     start_camera_ONCE()
-    port = int(os.environ.get("PORT", 5050))
-    app.run(debug=True, host="0.0.0.0", port=port)
+    app.run(debug=True, port=5050)
 
