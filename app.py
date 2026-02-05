@@ -48,7 +48,7 @@ def home():
 
 @app.route("/pcstats")
 def pcstats():
-    cpu_percent = psutil.cpu_percent(interval=0.3)
+    cpu_percent = psutil.cpu_percent(interval=0.25)
 
     ram = psutil.virtual_memory()
     disk = psutil.disk_usage("/")
