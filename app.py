@@ -35,6 +35,9 @@ def load_dashboard_config():
         config = yaml.safe_load(file)
     return config
 
+@app.errorhandler(404)
+def not_found(e):
+    return "Sorry, the page you are looking for does not exist."
 
 @app.route("/")
 def home():
