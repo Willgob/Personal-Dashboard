@@ -19,7 +19,10 @@ from bambu_camera import BambuCamera
 
 mqtt_client = bambu_lab_mqtt.start_mqtt()
 
-bambu_lab_mqtt.request_full_data(mqtt_client, bambu_lab_mqtt.printer_serial)
+try:
+    bambu_lab_mqtt.request_full_data(mqtt_client, bambu_lab_mqtt.printer_serial)
+except Exception as e:
+    print("error :", e)
 
 current_os = platform.system()
 
