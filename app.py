@@ -6,7 +6,7 @@ import subprocess
 import time
 from datetime import timedelta
 from threading import Thread
-import dbus
+import platform
 import psutil
 import pyperclip
 import requests
@@ -20,6 +20,14 @@ from bambu_camera import BambuCamera
 mqtt_client = bambu_lab_mqtt.start_mqtt()
 
 bambu_lab_mqtt.request_full_data(mqtt_client, bambu_lab_mqtt.printer_serial)
+
+current_os = platform.system()
+
+if current_os == "Linux":
+    import dbus
+
+if current_os == "Darwin":
+    pass 
 
 app = Flask(__name__)
 
@@ -130,7 +138,7 @@ def hackatime_data():
     return data
 
 
-def get_current_audio():
+def get_current_audio_linux():
     session_bus = dbus.SessionBus()
     players = [
         name
@@ -163,11 +171,22 @@ def get_current_audio():
         "cover": picture_cover,
     }
 
+def get_current_audio_darwin():
+    pass
+
+def get_current_audio_windows():
+    pass
 
 @app.route("/audio/current")
 def audio_current():
-    return get_current_audio()
-
+     if current_os == "Linux":
+        return get_current_audio_linux()
+     elif current_os == "Darwin":
+        return get_current_audio_darwin()
+     elif current_os == "Windows":
+         return get_current_audio_windows()
+     else:
+         return {"error": "Unsupported OS"}
 
 def get_playing_audio():
     bus = dbus.SessionBus()

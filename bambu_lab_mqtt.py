@@ -66,8 +66,8 @@ def send_command(client, serial, payload):
     client.publish(topic, json.dumps(payload))
     print("Command sent: ", json.dumps(payload,indent=2))
 
-def start_mqtt():
 
+def start_mqtt():
     client_id = "Personal_dashboard" + str(int(time.time()))
     client = mqtt.Client(client_id=client_id, clean_session=True)
     client.username_pw_set(printer_username, password)
@@ -75,13 +75,20 @@ def start_mqtt():
     client.tls_insecure_set(True)
 
     client.on_connect = on_connect
-
     client.on_message =on_message
-    client.connect(printer_ip, 8883, 60)
-    client.loop_start()
 
-    return client
+    try:
+        client.connect(printer_ip, 8883, 60)
+        client.loop_start()
+        return client
+    except Exception as e:
+        print("MQTT Printer Connection Error")
+        return None
 
 client = start_mqtt()
-time.sleep(1)
-request_full_data(client, printer_serial)
+
+if client is not None:
+    time.sleep(1)
+    request_full_data(client, printer_serial)
+else:
+    print("Failed to connect to MQTT")
