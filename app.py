@@ -30,7 +30,8 @@ if current_os == "Linux":
     import dbus
 
 if current_os == "Darwin":
-    pass 
+     from Foundation import NSObject
+     from MediaPlayer import MPMusicPlayerController
 
 app = Flask(__name__)
 
@@ -175,7 +176,34 @@ def get_current_audio_linux():
     }
 
 def get_current_audio_darwin():
-    pass
+     player = MPMusicPlayerController.systemMusicPlayer()
+     item = player.nowPlayingItem()
+
+     if item is None:
+         return {"error" : "NO playing audio",
+                 "Data" : item
+                 }  
+     
+     title = item.title()
+     artist = item.artist()
+     
+     state_map = {
+         0: "Stopped",
+         1 : "Playing",
+         2 :"Paused"
+     }
+     status = state_map.get(player.playbackState(), "Unknown")
+
+     position = player.currentPlaybackTime()
+     length = item.playbackDuration()
+
+     return {
+         "title": str(title),
+         "artist": str(artist),
+         "status": str(status),
+         "position": int(position),
+         "length": int(length)
+     }
 
 def get_current_audio_windows():
     pass
