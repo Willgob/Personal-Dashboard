@@ -643,12 +643,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function quote() {
-        const res = await fetch("/quote/daily")
+        const res = await fetch("/quote/auto")
         const data = await res.json();
 
         quote_widget = document.getElementById("widget-quote-content")
 
-        quote_widget.innerHTML = `${data}`;
+        quote_widget.innerHTML = `${data[0].q}`;
 
     }
 

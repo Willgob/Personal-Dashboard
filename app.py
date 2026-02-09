@@ -386,7 +386,7 @@ def quote_auto():
 
 
 @app.route("/quote/daily")
-def quote():
+def quote_daily():
     return jsonify(quote_of_the_day())
 
 

@@ -160,7 +160,7 @@ widgets:
     height: 1
     type: quote
     title: Quote of the day
-    style: auto
+    style: auto #OR Manual
 
   - id: bambu_lab-main
     x: 7
