@@ -640,6 +640,46 @@ def timetable_bell_times():
 def debug():
     return render_template("debug.html")
 
+@app.route("/github", methods=["GET", "POST"])
+def github():
+    url = "https://api.github.com"
+    headers = {"Authorization": f"Bearer {os.getenv('GITHUB_API_TOKEN')}"}
+    r = requests.get(url, headers=headers)
+    data = r.json()
+    return data
+
+@app.route("/github/data")
+def github_data():
+    url = "https://api.github.com/user"
+    headers = {"Authorization": f"Bearer {os.getenv('GITHUB_API_TOKEN')}"}
+    r = requests.get(url, headers=headers)
+    data = r.json()
+    return data
+
+@app.route("/github/user")
+def github_user():
+    url = f"https://api.github.com/users/{os.getenv('GITHUB_USERNAME')}"
+    headers = {"Authorization": f"Bearer {os.getenv('GITHUB_API_TOKEN')}"}
+    r = requests.get(url, headers=headers)
+    data = r.json()
+    return data
+
+@app.route("/github/user/repos")
+def github_user_repos():
+    url = f"https://api.github.com/users/{os.getenv('GITHUB_USERNAME')}/repos"
+    headers = {"Authorization": f"Bearer {os.getenv('GITHUB_API_TOKEN')}"}
+    r = requests.get(url, headers=headers)
+    data = r.json()
+    return data
+
+@app.route("/github/user/languages")
+def github_user_languages():
+    url = f"https://api.github.com/repos/{os.getenv('GITHUB_USERNAME')}/Personal-Dashboard/languages"
+    headers = {"Authorization": f"Bearer {os.getenv('GITHUB_API_TOKEN')}"}
+    r = requests.get(url, headers=headers)
+    data = r.json()
+    return data
+
 if __name__ == "__main__":
     start_camera_ONCE()
     app.run(debug=True, port=5050)
