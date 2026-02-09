@@ -658,7 +658,17 @@ def github_data():
 
 @app.route("/github/user")
 def github_user():
-    url = f"https://api.github.com/users/{os.getenv('GITHUB_USERNAME')}"
+
+    config = load_dashboard_config()
+    print("widgets:")
+    for w in config["widgets"]:
+        if w.get("type") == "github":
+            print(w)
+
+    widget = next((w for w in config["widgets"] if w["type"] == "github"), None)
+    username = widget.get("username")
+
+    url = f"https://api.github.com/users/{username}"
     headers = {"Authorization": f"Bearer {os.getenv('GITHUB_API_TOKEN')}"}
     r = requests.get(url, headers=headers)
     data = r.json()

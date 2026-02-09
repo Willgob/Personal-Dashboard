@@ -179,6 +179,14 @@ widgets:
     type: timetable
     title: Timetable
 
+  - id: github-main
+    x: 1
+    y: 8
+    width: 4
+    height: 4
+    type: github
+    title: Github
+    username: Willgob #Replace with your own
 
 theme: 1
 

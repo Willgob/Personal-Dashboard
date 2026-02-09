@@ -362,6 +362,21 @@
             </div>
             {% endif %}
 
+            {% if widget.type == "github" %}
+            <div class="widget github-widget"
+            data-x = "{{ widget.x }}"
+            data-y = "{{ widget.y }}"
+            data-width = "{{ widget.width }}"
+            data-height = "{{ widget.height }}"
+            data-widget-id = "{{ widget.id }}">
+
+                <div class="widget-header"> {{ widget.title }}</div>
+                 <b>User - <i>{{ widget.username }}</i> </b> 
+                <div id="widget-content">
+                </div>
+            </div>            
+            {% endif %}
+
 
             {% endfor %}
         </div>
