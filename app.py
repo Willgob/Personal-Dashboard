@@ -373,6 +373,17 @@ def quote_of_the_day():
     today = datetime.date.today().toordinal()
     return Quotes[today % len(Quotes)]
 
+@app.route("/quote")
+def quote():
+    config = load_dashboard_config()
+
+@app.route("/quote/auto")
+def quote_auto():
+    url="https://zenquotes.io/api/random"
+    r = requests.get(url, headers={})
+    data = r.json()
+    return jsonify(data)
+
 
 @app.route("/quote/daily")
 def quote():
