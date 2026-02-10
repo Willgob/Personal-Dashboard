@@ -28,8 +28,4 @@ client.tls_set(cert_reqs=ssl.CERT_NONE)
 client.tls_insecure_set(True)
 
 client.on_connect = on_connect
-client.on_message = on_message
-
-print("Connecting...")
-client.connect(printer_ip, 8883, 60)
-client.loop_forever()
+client.on_message = on_message 

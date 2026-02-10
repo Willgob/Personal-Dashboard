@@ -17,7 +17,11 @@ from flask import Flask, Response, jsonify, render_template, request, url_for
 import bambu_lab_mqtt
 from bambu_camera import BambuCamera
 
+load_dotenv()
+
 mqtt_client = bambu_lab_mqtt.start_mqtt()
+
+print("TOKEN:", os.getenv("GITHUB_API_TOKEN"))
 
 try:
     bambu_lab_mqtt.request_full_data(mqtt_client, bambu_lab_mqtt.printer_serial)
