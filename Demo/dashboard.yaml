@@ -1,0 +1,230 @@
+quotes:
+  - "The best time to start was yesterday. The next best time is now."
+  - "Be yourself; everyoneelse is already taken"
+  - "Im selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can't handle me at my worst, then you sure as hell don't deserve ce at my best."
+  - "So many books, so little time."
+  - "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe"
+  - "A room without books is like a body without a soul."
+  - " Be who you are and say what you feel, because those who mind don't matter, and those who matter don't mind."
+
+widgets:
+
+  - id: links-main
+    type: links
+    title: Quick Links
+    x: 5
+    y: 1
+    width: 1
+    height: 2
+    links:
+      - name: Google
+        url: https://google.com.au
+      - name: GitHub
+        url: https://github.com
+      - name: Youtube
+        url: https://youtube.com.au
+
+  - id: todos-main
+    type: todos
+    title: To-Do List
+    x: 3
+    y: 3
+    width: 2
+    height: 3
+    todos:
+      - task: Annoy my sister
+        done: true
+      - task: Hackclub The game
+        done: false
+
+  - id: weather-main
+    type: weather
+    title: Weather
+    location: Sydney, AU
+    tempunit: celsius
+    windspeedunit: kmh
+    latitude: -33.8688
+    longitude: 151.2093
+    x: 1
+    y: 1
+    width: 2
+    height: 2
+
+  - id: hackatime-main
+    x: 5
+    y: 3
+    width: 2
+    height: 2
+    type: hackatime
+    title: Hackatime
+    project: Personal-Dashboard
+    username: Willgob
+    # API: API HERE
+
+  - id: clock-main
+    x: 1
+    y: 3
+    width: 2
+    height: 1
+    type: clock
+    title: Clock
+
+  - id: timer-main
+    x: 3
+    y: 1
+    width: 2
+    height: 2
+    type: timer
+    title: Timer
+
+  - id: pc_stats-main
+    x: 6
+    y: 1
+    width: 2
+    height: 2
+    type: pc_stats
+    title: Stats
+
+  - id: pc_stats-advanced
+    x: 1
+    y: 4
+    width: 2
+    height: 2 
+    type: pc_stats_advanced
+    title: Device Statistics
+    display: 
+      - cpu-usage
+      - disk-usage
+      - ram-usage
+
+  - id: app_launch-main
+    x: 8
+    y: 1
+    width: 1
+    height: 2
+    type: app_launcher
+    title: Apps
+    apps: 
+      - name: Kicad
+        command: kicad
+        display_type: text
+
+      - name: Settings
+        command: systemsettings
+        image: settings.png
+        display_type: image
+
+      - name: Settings
+        command: systemsettings
+        image: settings.png
+        display_type: both
+
+      
+  - id: audio-main
+    x: 7
+    y: 3
+    width: 3
+    height: 2
+    type: audio
+    title: Audio
+
+
+  - id: volume-main
+    x: 9
+    y: 2
+    width: 1
+    height: 1
+    type: volume
+    title: Volume
+
+  - id: clipboard-main
+    x: 5
+    y: 5
+    width: 2
+    height: 4
+    type: clipboard
+    title: Clipboard
+
+  - id: mail-main
+    x: 1
+    y: 6
+    width: 2
+    height: 2
+    type: mail
+    title: Mail
+  
+  - id: quote-main
+    x: 9
+    y: 1
+    width: 3
+    height: 1
+    type: quote
+    title: Quote of the day
+    style: auto #OR Manual
+
+  - id: bambu_lab-main
+    x: 7
+    y: 5
+    width: 3
+    height: 3
+    type: bambu_lab
+    title: Bambu Lab P1S
+
+  - id: timetable-main
+    x: 10
+    y: 2
+    width: 2
+    height: 3
+    status: auto
+    type: timetable
+    title: Timetable
+
+  - id: github-main
+    x: 1
+    y: 8
+    width: 4
+    height: 4
+    type: github
+    title: Github
+    username: Willgob #Replace with your own
+
+theme: 1
+
+themes: 
+  1: 
+    primary: "#1e1e2f"
+    text_color: "#e0e0e0"
+    title_color: "#ffffff"
+    widget_background: "#2a2a3f"
+    widget_header: "#c4d7f5"
+    widget_border: "rgba(0,0,0,0.4)"
+    widget_border_hover: "rgba(0,0,0,0.5)"
+    widget_content_a: "#4f9cff"
+    widget_content_a_hover: "#82b0ff"
+    widget_content_ul: "#4f9cff"
+    widget_content_s: "#888"
+    weather_location: "#83aae0"
+    button_text_color: "#bebedc"
+    button_background: "#6d6d9a"
+    button_hover: "#5e708f"
+    input_text_color: "#fff"
+    input_background_color: "#474764"
+    audio_bar_background: "#3a3a58"
+    audio_bar_border: "#464679"
+    audio_bar_thumb: "#1154ab"
+    audio_bar_thumb_border: "#202e44"
+    audio_bar_time: "#254267"
+
+  2:
+    primary: "#f5f7fa"
+    text_color: "#2a2a2a"
+    title_color: "#1a1a1a"
+    widget_background: "#ffffff"
+    widget_header: "#e3e9f5"
+    widget_border: "rgba(0, 0, 0, 0.15)"
+    widget_border_hover: "rgba(0, 0, 0, 0.25)"
+    widget_content_a: "#2d6cdf"
+    widget_content_a_hover: "#ae4fbf"
+    widget_content_ul: "#2d6dcdf"
+    widget_content_s: "#777"
+    widget_location: "#3a6dbf"
