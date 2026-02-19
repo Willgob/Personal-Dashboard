@@ -377,6 +377,24 @@
             </div>            
             {% endif %}
 
+            {% if widget.type == "tokens" %}
+            <div class="widget token-widget"
+            data-x = "{{ widget.x }}"
+            data-y = "{{ widget.y }}"
+            data-width = "{{ widget.width }}"
+            data-height = "{{ widget.height }}"
+            data-widget-id = "{{ widget.id }}">
+                <div class="widget-header"> {{ widget.title }}</div>
+                <div id="widget-content">
+                    <ul class="token-list"></ul>
+                    <input class="token-name" placeholder="Name">
+                    <input class="token-token" placeholder="Token">
+                    <button class="token-add">Add</button>
+                    <button class="token-delete">Delete</button>
+                </div>
+            </div>
+            {% endif %}
+
 
             {% endfor %}
         </div>

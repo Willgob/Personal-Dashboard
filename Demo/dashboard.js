@@ -708,6 +708,79 @@ document.addEventListener('DOMContentLoaded', () => {
         bambulab()
     }
 
+    function save_token() {
+        const tokens = {};
+        document.querySelectorAll('.widget').forEach(widget => {
+            const id = widget.dataset.widgetId;
+            const list = widget.querySelectorAll('.token-list li');
+            if(list.length > 0) {
+                tokens[id] = [];
+                list.forEach(li => {
+                    const name = li.getAttribute('data-name');
+                    const token = li.getAttribute('data-token');
+                    tokens[id].push({name, token});
+                });
+            }
+        });
+        localStorage.setItem('tokens', JSON.stringify(tokens));
+    }
+
+    function create_token_item(name, token) {
+        const li = document.createElement('li');
+        const masked = token.slice(0, 4) + '***';
+        li.innerHTML = `<b>${name}</b> --- <span class="masked-token">${masked}</span>`
+        li.setAttribute('data-name', name);
+        li.setAttribute('data-token', token);
+
+        li.addEventListener('click', () => {
+            navigator.clipboard.writeText(token);
+            alert(`Token for ${name} copied to clipboard`);
+        });
+        return li;
+    }
+
+    function load_tokens() {
+        const tokens = JSON.parse(localStorage.getItem('tokens') || '{}');
+        document.querySelectorAll('.widget').forEach(widget => {
+            const id = widget.dataset.widgetId;
+            const list = widget.querySelector('.token-list');
+
+            if(list && tokens[id]) {
+                list.innerHTML = '';
+                tokens[id].forEach(item => {
+                    const li = create_token_item(item.name, item.token);
+                    list.appendChild(li);
+                })
+            }
+        });
+    }
+
+    function add_token() {
+        document.querySelectorAll('.widget').forEach(widget => {
+            const name_input = widget.querySelector('.token-name');
+            const token_input = widget.querySelector('.token-token');
+            const add_button = widget.querySelector('.token-add');
+            const list = widget.querySelector('.token-list');
+
+            if(!name_input || !token_input || !add_button || !list) return;
+
+            add_button.addEventListener('click', () => {
+                const name = name_input.value.trim();
+                const token = token_input.value.trim();
+                if(name === '' || token === '') return;
+
+                const li = create_token_item(name, token);
+                list.appendChild(li);
+
+                name_input.value = '';
+                token_input.value = '';
+
+                save_token();
+            });
+
+        });
+    }
+
 
     loadTodos();
     attachToggle();
@@ -726,6 +799,8 @@ document.addEventListener('DOMContentLoaded', () => {
     mail();
     quote();
     bambulab();
+    load_tokens();
+    add_token();
 
     // Lyrics(data.artist, data.title);
     setInterval(clipboard, 5000);
