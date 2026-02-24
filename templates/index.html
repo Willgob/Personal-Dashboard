@@ -10,8 +10,16 @@
         <title>Dashboard</title>
     </head>
     <body>
-        <h1>Personal Dashboard</h1>
-        
+        <div class="header">
+            <h1>Personal Dashboard </h1>
+            <!-- <div class="settings"><img src="/static/icons/settings.png" alt="settings" class="settingspng"></div> -->
+            <img src="/static/icons/settings.png" alt="settings" class="settingspng id="settings-button" onclick="Settings()">
+        </div>
+        <dialog id="filament-modal" class="filament-modal">
+            <div class="filament-modal-text" id="filament-modal-text"></div>
+            <button id="filament-modal-exit" class="filament-modal-exit" onclick="close_dialog()">Done</button>
+        </dialog>
+
         <div class="dashboard">
             {% for widget in widgets %}
             <!-- <div class="widget-header">{{ widget.title }}</div> -->

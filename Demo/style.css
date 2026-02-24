@@ -474,3 +474,14 @@ margin-bottom: 5px;
 .mail-popup-bold {
     font-weight: bold;
 }
+
+.settings {
+    font-size: 0.9rem;
+    font-weight: normal;
+    
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}

@@ -474,3 +474,25 @@ margin-bottom: 5px;
 .mail-popup-bold {
     font-weight: bold;
 }
+
+/* .settings {
+    margin-left: 30px;
+} */
+
+.header {
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.settingspng {
+    margin-left: 8px;
+    margin-top: 8px;
+    width: 24px;
+    height: 24px; 
+    cursor: pointer;
+}   
+
+.settingspng:hover {
+    transform: scale(1.1);
+}

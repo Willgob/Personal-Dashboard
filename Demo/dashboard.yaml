@@ -34,8 +34,7 @@ widgets:
     todos:
       - task: Annoy my sister
         done: true
-      - task: Hackclub The game
-        done: false
+
 
   - id: weather-main
     type: weather

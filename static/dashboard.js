@@ -803,6 +803,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    window.Settings = async function() {
+        const dialog = document.getElementById("filament-modal");
+            dialog.showModal();
+    }
+
 
 
     loadTodos();
@@ -825,6 +830,7 @@ document.addEventListener('DOMContentLoaded', () => {
     load_tokens();
     add_token();
     token_delete_button();
+    // Settings();
 
 
     // Lyrics(data.artist, data.title);
