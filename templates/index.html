@@ -16,7 +16,14 @@
             <img src="/static/icons/settings.png" alt="settings" class="settingspng id="settings-button" onclick="Settings()">
         </div>
         <dialog id="filament-modal" class="filament-modal">
-            <div class="filament-modal-text" id="filament-modal-text">test</div>
+            <div class="filament-modal-text" id="filament-modal-text">
+                <b>Settings</b>
+                <br>
+                <label class="switchsettings">
+                    <input type="checkbox" id="settingmodetoggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
             <button id="filament-modal-exit" class="filament-modal-exit" onclick="close_dialog()">Done</button>
         </dialog>
 

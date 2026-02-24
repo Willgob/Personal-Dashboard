@@ -496,3 +496,17 @@ margin-bottom: 5px;
 .settingspng:hover {
     transform: scale(1.1);
 }
+
+ .switch {
+    position: relative; 
+    display: inline-block; 
+    width: 46px;
+    height: 24px; 
+} 
+
+ .switch input {
+    opacity: 0; 
+    width: 0; 
+    height: 0; 
+}
+
