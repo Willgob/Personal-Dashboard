@@ -808,6 +808,61 @@ document.addEventListener('DOMContentLoaded', () => {
             dialog.showModal();
     }
 
+    function settings_toggle() {
+        const toggle = document.getElementById("settings_toggle");
+        const text = document.querySelectorAll(".settings-mode-text")
+        const text_YAML = document.querySelectorAll(".settings-mode-text-YAML");
+        const text_UI = document.querySelectorAll(".settings-mode-text-UI");
+
+        const toggle_state = localStorage.getItem("settings_toggle_state");
+        if (toggle_state !== null){
+            toggle.checked = toggle_state === "true";
+            const state = toggle.checked;
+
+            if(state === true) {
+                text_UI.forEach(text => {
+                    text.style.color = 'var(--widget_content_a)';
+                });
+                text_YAML.forEach(text => {
+                    text.style.color = '';
+                });
+            }
+
+            if(state === false){
+                text_YAML.forEach(text => {
+                    text.style.color = 'var(--widget_content_a)';
+                });
+                text_UI.forEach(text => {
+                    text.style.color = '';
+                });
+            }
+        }
+
+        toggle.addEventListener("change", () => {
+            const state = toggle.checked;
+            console.log("Toggle state - " + state);
+            localStorage.setItem("settings_toggle_state", state);
+
+            if(state === true) {
+                text_UI.forEach(text => {
+                    text.style.color = 'var(--widget_content_a)';
+                });
+                text_YAML.forEach(text => {
+                    text.style.color = '';
+                });
+            }
+
+            if(state === false){
+                text_YAML.forEach(text => {
+                    text.style.color = 'var(--widget_content_a)';
+                });
+                text_UI.forEach(text => {
+                    text.style.color = '';
+                });
+            }
+        });
+    }
+
 
 
     loadTodos();
@@ -831,6 +886,7 @@ document.addEventListener('DOMContentLoaded', () => {
     add_token();
     token_delete_button();
     // Settings();
+    settings_toggle();
 
 
     // Lyrics(data.artist, data.title);
