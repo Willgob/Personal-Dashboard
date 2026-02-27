@@ -196,10 +196,10 @@ widgets:
     type: tokens
     title: Tokens
 
-theme: 1
+theme: catppuccin
 
 themes: 
-  1: 
+  dark:
     primary: "#1e1e2f"
     text_color: "#e0e0e0"
     title_color: "#ffffff"
@@ -223,7 +223,7 @@ themes:
     audio_bar_thumb_border: "#202e44"
     audio_bar_time: "#254267"
 
-  2:
+  light: #In progress
     primary: "#f5f7fa"
     text_color: "#2a2a2a"
     title_color: "#1a1a1a"
@@ -236,3 +236,13 @@ themes:
     widget_content_ul: "#2d6dcdf"
     widget_content_s: "#777"
     widget_location: "#3a6dbf"
+
+  catppuccin:
+    primary: "#1e1e2e"
+    text_color: "#cdd6f4"
+    title_color: "#bac2de"
+    widget_background: "#181825"
+    widget_header: "#a6adc8"
+    # widget_border: "rgba(69, 71, 90, 0.15)"
+    # widget_border: "rgba(203, 166, 247, 0.15)"
+    widget_border_hover: "rgba(69, 71, 90, 0.25)"
