@@ -823,6 +823,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 text_UI.forEach(text => {
                     text.style.color = 'var(--widget_content_a)';
                 });
+                document.body.dataset.settingsMode = "ui";
                 text_YAML.forEach(text => {
                     text.style.color = '';
                 });
@@ -832,6 +833,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 text_YAML.forEach(text => {
                     text.style.color = 'var(--widget_content_a)';
                 });
+                document.body.dataset.settingsMode = "yaml";
                 text_UI.forEach(text => {
                     text.style.color = '';
                 });
@@ -850,6 +852,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 text_YAML.forEach(text => {
                     text.style.color = '';
                 });
+                document.body.dataset.settingsMode = "ui";
             }
 
             if(state === false){
@@ -859,6 +862,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 text_UI.forEach(text => {
                     text.style.color = '';
                 });
+                document.body.dataset.settingsMode = "yaml";
             }
         });
     }
