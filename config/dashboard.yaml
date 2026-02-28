@@ -246,3 +246,4 @@ themes:
     # widget_border: "rgba(69, 71, 90, 0.15)"
     # widget_border: "rgba(203, 166, 247, 0.15)"
     widget_border_hover: "rgba(69, 71, 90, 0.25)"
+    
