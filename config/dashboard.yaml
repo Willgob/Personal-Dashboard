@@ -196,7 +196,7 @@ widgets:
     type: tokens
     title: Tokens
 
-theme: catppuccin
+theme: dark
 
 themes: 
   dark:
@@ -237,7 +237,7 @@ themes:
     widget_content_s: "#777"
     widget_location: "#3a6dbf"
 
-  catppuccin:
+  catppuccin: #In progress
     primary: "#1e1e2e"
     text_color: "#cdd6f4"
     title_color: "#bac2de"
