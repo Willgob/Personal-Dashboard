@@ -8,7 +8,7 @@ from datetime import timedelta
 from threading import Thread
 import platform
 # import psutil
-import pyperclip
+# import pyperclip
 import requests
 import yaml
 from dotenv import load_dotenv
