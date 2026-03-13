@@ -7,7 +7,7 @@ import time
 from datetime import timedelta
 from threading import Thread
 import platform
-import psutil
+# import psutil
 import pyperclip
 import requests
 import yaml
@@ -64,6 +64,10 @@ def home():
 
 @app.route("/pcstats")
 def pcstats():
+    try:
+        import psutil
+    except ImportError:
+        return {"error": "psutil library is not installed"}
     cpu_percent = psutil.cpu_percent(interval=0.25)
 
     ram = psutil.virtual_memory()
