@@ -31,7 +31,10 @@ except Exception as e:
 current_os = platform.system()
 
 if current_os == "Linux":
-    import dbus
+    try:
+        import dbus
+    except ImportError:
+        print("dbus library is not installed. Audio controls will not work.")
 
 if current_os == "Darwin":
      from Foundation import NSObject
